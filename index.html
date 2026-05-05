@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo - Fábrica de Filtros de Linha</title>
+    <title>Catálogo Interativo - Fábrica de Filtros de Linha</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
         
-        /* Estilização para impressão e salvamento em PDF */
         @media print {
             @page { size: landscape; margin: 0.5cm; }
             .no-print { display: none; }
@@ -17,202 +16,168 @@
             .shadow-xl, .shadow-md, .shadow-sm { box-shadow: none !important; border: 1px solid #e2e8f0; }
         }
 
-        /* Definição de larguras para manter a simetria da tabela */
-        .col-modelo { width: 30%; }
-        .col-precos { width: 18%; }
-        .col-master { width: 16%; }
+        .col-modelo { width: 25%; }
+        .col-precos { width: 20%; }
+        .col-master { width: 15%; }
 
-        /* Ajuste de fallback para imagens */
-        .img-placeholder {
-            background-color: #f1f5f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-size: 10px;
-            color: #94a3b8;
-            font-weight: bold;
+        /* Estilo para inputs de quantidade */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 pb-12">
+<body class="bg-slate-50 text-slate-800 pb-24 md:pb-12">
 
     <!-- Cabeçalho Principal -->
     <header class="bg-slate-900 text-white shadow-lg md:mt-6">
         <div class="max-w-7xl mx-auto px-4 md:px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6">
-                <!-- Logotipo -->
                 <div class="bg-white p-2 rounded-xl shadow-inner w-20 h-20 flex items-center justify-center overflow-hidden border-2 border-white">
                     <img src="image_6acbb3.png" alt="Logo @filtrodelinhabr" class="max-w-full max-h-full object-contain" onerror="this.parentElement.className='img-placeholder w-20 h-20 rounded-xl bg-slate-200 flex items-center justify-center'; this.outerHTML='<span class=\'text-slate-900 font-black text-[10px] text-center\'>FILTRO<br>BR</span>'">
                 </div>
                 <div class="text-center md:text-left">
                     <h1 class="text-2xl font-black tracking-tight uppercase italic mb-0">Fábrica de Filtros</h1>
                     <p class="text-blue-400 font-medium tracking-[0.2em] text-[10px] uppercase">
-                        Tabela Unificada • Atacado & Varejo 2026
+                        Catálogo de Pedidos • 2026
                     </p>
                 </div>
             </div>
             
-            <!-- Selos de Qualidade (Apenas Desktop) -->
-            <div class="grid grid-cols-3 gap-6 text-center border-l border-slate-700 pl-6 hidden lg:grid">
-                <div class="flex flex-col items-center">
-                    <svg class="text-blue-400 mb-1 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    <span class="text-[8px] font-bold uppercase tracking-tighter leading-none text-slate-300">Qualidade<br>Certificada</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <svg class="text-yellow-400 mb-1 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-                    <span class="text-[8px] font-bold uppercase tracking-tighter leading-none text-slate-300">Fusível<br>Reserva</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <svg class="text-green-400 mb-1 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-                    <span class="text-[8px] font-bold uppercase tracking-tighter leading-none text-slate-300">Envio<br>Nacional</span>
-                </div>
+            <div class="flex gap-4 no-print">
+                <button onclick="exportToPDF()" class="hidden md:flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    PDF (PAISAGEM)
+                </button>
             </div>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto px-4 md:px-6 -mt-4">
-        <!-- Banner de Condições e Regras -->
+        <!-- Banner de Condições -->
         <div class="bg-blue-600 text-white rounded-xl p-3 shadow-xl flex flex-col md:flex-row items-center justify-center gap-4 mb-8 text-center border-b-4 border-blue-800">
             <div class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
                 <p class="text-[10px] font-black uppercase tracking-wide">B2B • @filtrodelinhabr</p>
             </div>
             <div class="flex items-center gap-2 text-yellow-200">
-                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-                <p class="text-[10px] font-black uppercase tracking-tight">Primeiro pedido: Somente PIX</p>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                <p class="text-[10px] font-black uppercase tracking-tight">Primeiro pedido: PIX</p>
             </div>
             <div class="flex items-center gap-2 text-red-100">
-                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-                <p class="text-[10px] font-black uppercase tracking-tight italic">Nota Fiscal: +10% no valor final</p>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                <p class="text-[10px] font-black uppercase tracking-tight italic">Nota Fiscal: +10%</p>
             </div>
         </div>
 
-        <!-- Secção de Tabelas -->
         <section class="mb-10">
             <div class="flex flex-col md:flex-row items-center justify-between mb-4 gap-4">
                 <h2 class="text-lg font-black text-slate-900 flex items-center gap-2 uppercase tracking-tight">
                     <span class="w-6 h-1 bg-blue-600 rounded-full"></span>
-                    Tabela de Preços e Condições
+                    Monte seu Pedido
                 </h2>
-                <!-- Legenda de Cores -->
-                <div class="flex gap-4 no-print">
-                    <div class="flex items-center gap-2">
-                        <span class="w-3 h-3 bg-blue-600 rounded-sm"></span>
-                        <span class="text-[11px] font-bold text-slate-500 uppercase tracking-tighter">Preço Atacado (Master)</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="w-3 h-3 bg-slate-300 rounded-sm"></span>
-                        <span class="text-[13px] font-bold text-slate-500 uppercase tracking-tighter">Preço Unitário Avulso</span>
-                    </div>
+                <div class="flex gap-4 no-print text-[9px] font-bold text-slate-500 uppercase">
+                    <div class="flex items-center gap-2"><span class="w-3 h-3 bg-blue-600 rounded-sm"></span> Atacado</div>
+                    <div class="flex items-center gap-2"><span class="w-3 h-3 bg-slate-300 rounded-sm"></span> Unitário</div>
                 </div>
             </div>
             
-            <!-- Mobile View: Cards Adaptados -->
-            <div id="cards-container" class="grid grid-cols-1 gap-4 md:hidden">
-                <!-- Gerado via JavaScript -->
+            <!-- Mobile: Lista de Cards com inputs -->
+            <div id="cards-container" class="grid grid-cols-1 gap-4 md:hidden no-print">
+                <!-- Gerado via JS -->
             </div>
 
-            <!-- Desktop View: Tabela Unificada -->
+            <!-- Desktop: Tabela Unificada com inputs -->
             <div class="hidden md:block bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden">
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left text-[11px] table-fixed">
+                    <table class="w-full text-left text-[11px] table-fixed border-collapse">
                         <thead>
                             <tr class="bg-slate-900 text-white">
                                 <th class="p-4 font-bold uppercase tracking-widest border-r border-slate-800 col-modelo">Modelo do Produto</th>
                                 <th class="p-4 font-bold uppercase tracking-widest text-center border-r border-slate-800 col-precos">Cabo 1,1m</th>
                                 <th class="p-4 font-bold uppercase tracking-widest text-center border-r border-slate-800 col-precos">Cabo 3,0m</th>
                                 <th class="p-4 font-bold uppercase tracking-widest text-center border-r border-slate-800 col-precos">Cabo 5,0m</th>
-                                <th class="p-4 font-bold uppercase tracking-widest text-center bg-blue-700 col-master">Cx. Master</th>
+                                <th class="p-4 font-bold uppercase tracking-widest text-center bg-blue-700 col-master">Mín. Caixa</th>
                             </tr>
                         </thead>
                         <tbody id="table-body" class="text-slate-700">
-                            <!-- Gerado via JavaScript -->
+                            <!-- Gerado via JS -->
                         </tbody>
                     </table>
                 </div>
             </div>
         </section>
 
-        <!-- Rodapé de Informações e Contacto -->
         <footer class="mt-8 bg-white border border-slate-200 rounded-2xl p-6 flex flex-col lg:flex-row justify-between items-center gap-8 shadow-sm">
-            <div class="flex-1 text-center lg:text-left">
-                <h4 class="font-black text-slate-900 uppercase mb-3 text-xs tracking-widest">Informações Importantes</h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-1.5 text-[10px] text-slate-600">
-                    <p class="flex items-center gap-2">• Todos os modelos acompanham fusível reserva.</p>
-                    <p class="font-black text-blue-700 uppercase">→ Garantimos o melhor preço na Caixa Master.</p>
-                    <p>• Cabos 0,75mm² certificados pelo Inmetro.</p>
-                    <p class="font-black text-red-600 tracking-tighter uppercase">• Pedidos com Nota Fiscal (+10% no valor).</p>
-                    <p class="font-bold text-slate-900 uppercase tracking-tighter">• Pagamento: Primeiro pedido somente via PIX.</p>
-                    <p>• Faturamento disponível para CNPJ (sujeito a análise).</p>
+            <div class="flex-1 text-center lg:text-left text-[10px] text-slate-600">
+                <h4 class="font-black text-slate-900 uppercase mb-3 text-xs tracking-widest">Informações</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-1.5">
+                    <p>• Fusível reserva incluso em todos os modelos.</p>
+                    <p class="font-black text-blue-700 uppercase">→ Desconto automático na Caixa Master.</p>
+                    <p>• Cabos 0,75mm² certificados Inmetro.</p>
+                    <p class="font-black text-red-600 uppercase">• Nota Fiscal (+10% no valor).</p>
+                    <p class="font-bold text-slate-900">• Primeiro pedido: Somente via PIX.</p>
+                    <p>• Faturamento para CNPJ sob análise.</p>
                 </div>
             </div>
-            
-            <!-- Botões de Contacto -->
             <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-                <div class="bg-slate-900 text-white px-6 py-4 rounded-xl shadow-lg border-b-4 border-blue-600 text-center flex-1 min-w-[180px]">
-                    <p class="text-[8px] font-black text-blue-400 uppercase mb-1 tracking-widest italic">WhatsApp Comercial</p>
+                <div class="bg-slate-900 text-white px-6 py-4 rounded-xl shadow-lg border-b-4 border-blue-600 text-center flex-1 min-w-[160px]">
+                    <p class="text-[8px] font-black text-blue-400 uppercase mb-1 tracking-widest">WhatsApp</p>
                     <span class="text-lg font-black block tracking-tighter italic">11 95494-1312</span>
-                </div>
-                <div class="bg-slate-800 text-white px-6 py-4 rounded-xl shadow-lg border-b-4 border-slate-600 text-center flex-1 min-w-[180px]">
-                    <p class="text-[8px] font-black text-slate-400 uppercase mb-1 tracking-widest italic">Instagram Oficial</p>
-                    <span class="text-lg font-black block text-blue-400 tracking-tighter italic">@filtrodelinhabr</span>
                 </div>
             </div>
         </footer>
     </main>
 
-    <!-- Rodapé de Copyright -->
-    <div class="text-center mt-6 text-slate-400 text-[8px] uppercase font-bold tracking-[0.4em]">
-        Fábrica de Filtros de Linha • Atibaia - SP • 2026
+    <!-- Carrinho Flutuante (Apenas Mobile/Web, oculto em print) -->
+    <div id="cart-drawer" class="fixed bottom-0 left-0 right-0 z-50 no-print transition-transform transform translate-y-full">
+        <div class="bg-white border-t border-slate-200 shadow-2xl p-4 md:max-w-md md:mx-auto md:mb-4 md:rounded-2xl md:border">
+            <div class="flex items-center justify-between mb-3 border-b pb-2">
+                <h3 class="font-black text-slate-900 uppercase text-xs flex items-center gap-2">
+                    <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    Resumo do Pedido
+                </h3>
+                <button onclick="toggleCart()" class="text-slate-400 hover:text-slate-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+            </div>
+            <div id="cart-items" class="max-h-48 overflow-y-auto mb-4 space-y-2 text-[10px]">
+                <!-- Itens do carrinho -->
+            </div>
+            <div class="flex items-center justify-between mb-4 px-2">
+                <span class="text-xs font-bold text-slate-500 uppercase">Subtotal Estimado:</span>
+                <span id="cart-total" class="text-lg font-black text-blue-700 font-mono italic">R$ 0,00</span>
+            </div>
+            <button onclick="sendWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white font-black py-3 rounded-xl shadow-lg flex items-center justify-center gap-3 transition transform active:scale-95">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                ENVIAR PEDIDO POR WHATSAPP
+            </button>
+        </div>
     </div>
 
-    <!-- Lógica de Dados e Renderização -->
+    <!-- Botão Ativar Carrinho (Sticky) -->
+    <button id="cart-badge" onclick="toggleCart()" class="fixed bottom-6 right-6 z-40 bg-blue-600 text-white p-4 rounded-full shadow-2xl no-print hover:scale-110 transition-transform flex items-center gap-3">
+        <div class="relative">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">0</span>
+        </div>
+        <span class="font-black text-xs uppercase hidden md:inline">Meu Pedido</span>
+    </button>
+
     <script>
         const products = [
-            {
-                name: "Filtro 3 Tomadas ABS",
-                master: "20",
-                masterPrices: { c1: "22,90", c3: "26,90", c5: "34,90" },
-                unitPrices: { c1: "24,90", c3: "28,90", c5: "36,90" }
-            },
-            {
-                name: "Filtro 4 Tomadas ABS",
-                master: "20",
-                masterPrices: { c1: "24,50", c3: "29,50", c5: "38,50" },
-                unitPrices: { c1: "26,50", c3: "31,50", c5: "40,50" }
-            },
-            {
-                name: "Filtro 5 Tomadas ABS",
-                master: "20",
-                masterPrices: { c1: "25,90", c3: "29,90", c5: "38,90" },
-                unitPrices: { c1: "27,90", c3: "31,90", c5: "40,90" }
-            },
-            {
-                name: "Filtro 6 Tomadas ABS",
-                master: "16",
-                masterPrices: { c1: "31,10", c3: "35,25", c5: "39,25" },
-                unitPrices: { c1: "33,10", c3: "37,25", c5: "41,25" }
-            },
-            {
-                name: "Filtro 6 Tomadas Metal",
-                master: "12",
-                masterPrices: { c1: "43,00", c3: "47,00", c5: "51,00" },
-                unitPrices: { c1: "45,00", c3: "49,00", c5: "53,00" }
-            },
-            {
-                name: "Filtro 8 Tomadas Metal",
-                master: "10",
-                masterPrices: { c1: "52,00", c3: "56,00", c5: "60,00" },
-                unitPrices: { c1: "54,00", c3: "58,00", c5: "62,00" }
-            },
-            {
-                name: "Filtro 10 Tomadas Metal",
-                master: "8",
-                masterPrices: { c1: "59,00", c3: "64,00", c5: "68,00" },
-                unitPrices: { c1: "61,00", c3: "66,00", c5: "70,00" }
-            }
+            { id: 1, name: "Filtro 3 Tomadas ABS", master: 20, masterPrices: { c1: 22.90, c3: 26.90, c5: 34.90 }, unitPrices: { c1: 24.90, c3: 28.90, c5: 36.90 } },
+            { id: 2, name: "Filtro 4 Tomadas ABS", master: 20, masterPrices: { c1: 24.50, c3: 29.50, c5: 38.50 }, unitPrices: { c1: 26.50, c3: 31.50, c5: 40.50 } },
+            { id: 3, name: "Filtro 5 Tomadas ABS", master: 20, masterPrices: { c1: 25.90, c3: 29.90, c5: 38.90 }, unitPrices: { c1: 27.90, c3: 31.90, c5: 40.90 } },
+            { id: 4, name: "Filtro 6 Tomadas ABS", master: 16, masterPrices: { c1: 31.10, c3: 35.25, c5: 39.25 }, unitPrices: { c1: 33.10, c3: 37.25, c5: 41.25 } },
+            { id: 5, name: "Filtro 6 Tomadas Metal", master: 12, masterPrices: { c1: 43.00, c3: 47.00, c5: 51.00 }, unitPrices: { c1: 45.00, c3: 49.00, c5: 53.00 } },
+            { id: 6, name: "Filtro 8 Tomadas Metal", master: 10, masterPrices: { c1: 52.00, c3: 56.00, c5: 60.00 }, unitPrices: { c1: 54.00, c3: 58.00, c5: 62.00 } },
+            { id: 7, name: "Filtro 10 Tomadas Metal", master: 8, masterPrices: { c1: 59.00, c3: 64.00, c5: 68.00 }, unitPrices: { c1: 61.00, c3: 66.00, c5: 70.00 } }
         ];
+
+        let cart = {}; // { "id-cable": quantity }
+        let isCartOpen = false;
 
         function renderContent() {
             const tableBody = document.getElementById('table-body');
@@ -223,52 +188,176 @@
                 const rowClass = idx % 2 === 0 ? 'bg-white' : 'bg-slate-50';
                 const accentColor = isMetal ? 'text-orange-700' : 'text-slate-900';
 
-                // Desktop View Row
+                // Render Desktop
                 tableBody.innerHTML += `
-                    <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition-colors ${rowClass}">
+                    <tr class="border-b border-slate-100 ${rowClass}">
                         <td class="p-4 border-r border-slate-100 font-black uppercase tracking-tighter ${accentColor}">
                             ${p.name}
                         </td>
-                        ${['c1', 'c3', 'c5'].map(key => `
-                            <td class="p-4 text-center border-r border-slate-100">
-                                <div class="flex flex-col gap-0.5">
-                                    <span class="text-[16px] font-black text-blue-700 font-mono tracking-tight leading-none">R$ ${p.masterPrices[key]}</span>
-                                    <span class="text-[13px] font-bold text-slate-400 font-mono tracking-tight leading-none mt-1 italic">R$ ${p.unitPrices[key]}</span>
+                        ${['c1', 'c3', 'c5'].map(cable => {
+                            const cableName = cable === 'c1' ? '1,1m' : cable === 'c3' ? '3,0m' : '5,0m';
+                            const cartKey = `${p.id}-${cable}`;
+                            return `
+                            <td class="p-2 text-center border-r border-slate-100">
+                                <div class="flex flex-col gap-1 items-center mb-2">
+                                    <span class="text-[13px] font-black text-blue-700 font-mono leading-none">R$ ${p.masterPrices[cable].toFixed(2)}</span>
+                                    <span class="text-[11px] font-bold text-slate-400 font-mono leading-none italic">R$ ${p.unitPrices[cable].toFixed(2)}</span>
                                 </div>
-                            </td>
-                        `).join('')}
+                                <div class="flex items-center justify-center no-print bg-slate-100 p-1 rounded-lg w-fit mx-auto border border-slate-200">
+                                    <button onclick="updateQty('${cartKey}', -1)" class="w-6 h-6 flex items-center justify-center bg-white rounded-md shadow-sm hover:bg-red-50 text-slate-500 font-bold">-</button>
+                                    <input type="number" id="qty-${cartKey}" value="${cart[cartKey] || 0}" min="0" onchange="setQty('${cartKey}', this.value)" class="w-10 text-center bg-transparent font-black text-slate-900 text-[10px]">
+                                    <button onclick="updateQty('${cartKey}', 1)" class="w-6 h-6 flex items-center justify-center bg-white rounded-md shadow-sm hover:bg-blue-50 text-slate-500 font-bold">+</button>
+                                </div>
+                            </td>`;
+                        }).join('')}
                         <td class="p-4 text-center font-black bg-blue-50/50 text-slate-900">
                             <div class="flex items-center justify-center gap-1.5 uppercase text-[10px]">
-                                <svg class="w-3 h-3 text-blue-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-2-2H5L3 8v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"></path><path d="M3 10h18"></path><path d="M10 14h4"></path></svg>
+                                <svg class="w-3 h-3 text-blue-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M21 8l-2-2H5L3 8v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"></path><path d="M3 10h18"></path><path d="M10 14h4"></path></svg>
                                 ${p.master} un
                             </div>
                         </td>
                     </tr>
                 `;
 
-                // Mobile View Card
+                // Render Mobile
                 cardsContainer.innerHTML += `
                     <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 border-l-4 ${isMetal ? 'border-l-orange-500' : 'border-l-slate-800'}">
-                        <div class="flex justify-between items-center mb-3 border-b pb-2 border-slate-50">
+                        <div class="flex justify-between items-center mb-4 border-b pb-2 border-slate-50">
                             <span class="font-black uppercase text-xs tracking-tighter ${accentColor}">${p.name}</span>
-                            <span class="bg-blue-600 text-white text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">${p.master} UNIDADES</span>
+                            <span class="bg-blue-100 text-blue-700 text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">${p.master} UNID/CAIXA</span>
                         </div>
-                        <div class="grid grid-cols-3 gap-2 text-center">
-                            ${[
-                                {label: '1.1m', key: 'c1'},
-                                {label: '3.0m', key: 'c3'},
-                                {label: '5.0m', key: 'c5'}
-                            ].map(c => `
-                                <div class="flex flex-col border-r last:border-0 border-slate-50">
-                                    <span class="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1 leading-none">${c.label}</span>
-                                    <span class="text-[14px] font-black text-blue-700 font-mono leading-none">R$ ${p.masterPrices[c.key]}</span>
-                                    <span class="text-[12px] font-bold text-slate-300 font-mono mt-1 leading-none italic">R$ ${p.unitPrices[c.key]}</span>
-                                </div>
-                            `).join('')}
+                        <div class="grid grid-cols-1 gap-4">
+                            ${[{l: '1,1m', k: 'c1'}, {l: '3,0m', k: 'c3'}, {l: '5,0m', k: 'c5'}].map(item => {
+                                const cartKey = `${p.id}-${item.k}`;
+                                return `
+                                <div class="flex items-center justify-between">
+                                    <div class="flex flex-col">
+                                        <span class="text-[10px] font-black text-slate-400 uppercase leading-none">Cabo ${item.l}</span>
+                                        <div class="flex gap-2 mt-1">
+                                            <span class="text-[14px] font-black text-blue-700">R$ ${p.masterPrices[item.k].toFixed(2)}</span>
+                                            <span class="text-[12px] font-bold text-slate-300 italic">R$ ${p.unitPrices[item.k].toFixed(2)}</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200">
+                                        <button onclick="updateQty('${cartKey}', -1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm text-slate-400">-</button>
+                                        <input type="number" id="mqty-${cartKey}" value="${cart[cartKey] || 0}" class="w-12 text-center bg-transparent font-black text-slate-900 text-sm">
+                                        <button onclick="updateQty('${cartKey}', 1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm text-blue-600">+</button>
+                                    </div>
+                                </div>`;
+                            }).join('')}
                         </div>
                     </div>
                 `;
             });
+        }
+
+        function updateQty(key, delta) {
+            const current = cart[key] || 0;
+            const newVal = Math.max(0, current + delta);
+            setQty(key, newVal);
+        }
+
+        function setQty(key, val) {
+            const quantity = parseInt(val) || 0;
+            if (quantity <= 0) {
+                delete cart[key];
+            } else {
+                cart[key] = quantity;
+            }
+            updateUI(key);
+            updateCartSummary();
+        }
+
+        function updateUI(key) {
+            const inputs = [`qty-${key}`, `mqty-${key}`];
+            inputs.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = cart[key] || 0;
+            });
+        }
+
+        function updateCartSummary() {
+            const list = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
+            const countEl = document.getElementById('cart-count');
+            const drawer = document.getElementById('cart-drawer');
+            
+            list.innerHTML = "";
+            let total = 0;
+            let totalItems = 0;
+
+            Object.keys(cart).forEach(key => {
+                const [id, cable] = key.split('-');
+                const p = products.find(prod => prod.id == id);
+                const qty = cart[key];
+                
+                // Determina preço (usa atacado se atingir a caixa master)
+                const price = qty >= p.master ? p.masterPrices[cable] : p.unitPrices[cable];
+                const sub = price * qty;
+                total += sub;
+                totalItems += qty;
+
+                const cableLabel = cable === 'c1' ? '1,1m' : cable === 'c3' ? '3,0m' : '5,0m';
+
+                list.innerHTML += `
+                    <div class="flex items-center justify-between border-b border-slate-50 pb-1">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-slate-800 uppercase">${p.name}</span>
+                            <span class="text-[8px] text-slate-400">Cabo ${cableLabel} • ${qty >= p.master ? 'Preço Atacado' : 'Preço Unitário'}</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="font-black text-slate-500">${qty}x</span>
+                            <span class="font-bold text-blue-600">R$ ${sub.toFixed(2)}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            totalEl.innerText = `R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+            countEl.innerText = totalItems;
+
+            if (totalItems > 0 && !isCartOpen) {
+                // Notifica que tem item se o carrinho estiver fechado mas tiver mudado
+            }
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            isCartOpen = !isCartOpen;
+            drawer.style.transform = isCartOpen ? 'translateY(0)' : 'translateY(100%)';
+        }
+
+        function sendWhatsApp() {
+            const phoneNumber = "5511954941312";
+            let message = "*NOVO PEDIDO - FÁBRICA DE FILTROS*\n\n";
+            let total = 0;
+
+            Object.keys(cart).forEach(key => {
+                const [id, cable] = key.split('-');
+                const p = products.find(prod => prod.id == id);
+                const qty = cart[key];
+                const cableLabel = cable === 'c1' ? '1,1m' : cable === 'c3' ? '3,0m' : '5,0m';
+                const price = qty >= p.master ? p.masterPrices[cable] : p.unitPrices[cable];
+                const sub = price * qty;
+                total += sub;
+
+                message += `📦 *${p.name}*\n`;
+                message += `📏 Cabo: ${cableLabel}\n`;
+                message += `🔢 Qtd: ${qty} un\n`;
+                message += `💰 Unit: R$ ${price.toFixed(2)} (${qty >= p.master ? 'Atacado' : 'Avulso'})\n`;
+                message += `💵 Subtotal: *R$ ${sub.toFixed(2)}*\n\n`;
+            });
+
+            message += `------------------------\n`;
+            message += `⚡ *TOTAL ESTIMADO: R$ ${total.toFixed(2)}*\n\n`;
+            message += `_O faturamento oficial será realizado pelo consultor comercial._`;
+
+            const encoded = encodeURIComponent(message);
+            window.open(`https://wa.me/${phoneNumber}?text=${encoded}`);
+        }
+
+        function exportToPDF() {
+            window.print();
         }
 
         window.onload = renderContent;
