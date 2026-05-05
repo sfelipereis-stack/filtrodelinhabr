@@ -99,11 +99,11 @@
                 <div class="flex gap-4 no-print">
                     <div class="flex items-center gap-2">
                         <span class="w-3 h-3 bg-blue-600 rounded-sm"></span>
-                        <span class="text-[9px] font-bold text-slate-500 uppercase tracking-tighter">Preço Atacado (Master)</span>
+                        <span class="text-[11px] font-bold text-slate-500 uppercase tracking-tighter">Preço Atacado (Master)</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="w-3 h-3 bg-slate-300 rounded-sm"></span>
-                        <span class="text-[9px] font-bold text-slate-500 uppercase tracking-tighter">Preço Unitário Avulso</span>
+                        <span class="text-[13px] font-bold text-slate-500 uppercase tracking-tighter">Preço Unitário Avulso</span>
                     </div>
                 </div>
             </div>
@@ -232,8 +232,8 @@
                         ${['c1', 'c3', 'c5'].map(key => `
                             <td class="p-4 text-center border-r border-slate-100">
                                 <div class="flex flex-col gap-0.5">
-                                    <span class="text-[12px] font-black text-blue-700 font-mono tracking-tight leading-none">R$ ${p.masterPrices[key]}</span>
-                                    <span class="text-[9px] font-bold text-slate-400 font-mono tracking-tight leading-none mt-1 italic">R$ ${p.unitPrices[key]}</span>
+                                    <span class="text-[16px] font-black text-blue-700 font-mono tracking-tight leading-none">R$ ${p.masterPrices[key]}</span>
+                                    <span class="text-[13px] font-bold text-slate-400 font-mono tracking-tight leading-none mt-1 italic">R$ ${p.unitPrices[key]}</span>
                                 </div>
                             </td>
                         `).join('')}
@@ -261,8 +261,8 @@
                             ].map(c => `
                                 <div class="flex flex-col border-r last:border-0 border-slate-50">
                                     <span class="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1 leading-none">${c.label}</span>
-                                    <span class="text-[11px] font-black text-blue-700 font-mono leading-none">R$ ${p.masterPrices[c.key]}</span>
-                                    <span class="text-[8px] font-bold text-slate-300 font-mono mt-1 leading-none italic">R$ ${p.unitPrices[c.key]}</span>
+                                    <span class="text-[14px] font-black text-blue-700 font-mono leading-none">R$ ${p.masterPrices[c.key]}</span>
+                                    <span class="text-[12px] font-bold text-slate-300 font-mono mt-1 leading-none italic">R$ ${p.unitPrices[c.key]}</span>
                                 </div>
                             `).join('')}
                         </div>
