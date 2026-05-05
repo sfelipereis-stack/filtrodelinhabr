@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo - Fábrica de Filtros de Linha</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        @media print {
+            @page { size: landscape; margin: 0.5cm; }
+            .no-print { display: none; }
+            body { background: white; }
+            .shadow-xl, .shadow-md, .shadow-sm { box-shadow: none !important; border: 1px solid #e2e8f0; }
+        }
+
+        /* Alinhamento de colunas para tabela unificada */
+        .col-modelo { width: 30%; }
+        .col-precos { width: 18%; }
+        .col-master { width: 16%; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 pb-12">
+
+    <!-- Cabeçalho -->
+    <header class="bg-slate-900 text-white shadow-lg md:mt-6">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+                <div class="bg-white p-2 rounded-xl shadow-inner w-20 h-20 flex items-center justify-center overflow-hidden border-2 border-white">
+                    <img src="image_6acbb3.png" alt="Logo @filtrodelinhabr" class="max-w-full max-h-full object-contain" onerror="this.parentElement.className='img-placeholder w-20 h-20 rounded-xl bg-slate-200 flex items-center justify-center'; this.outerHTML='<span class=\'text-slate-900 font-black text-[10px] text-center\'>FILTRO<br>BR</span>'">
+                </div>
+                <div class="text-center md:text-left">
+                    <h1 class="text-2xl font-black tracking-tight uppercase italic mb-0">Fábrica de Filtros</h1>
+                    <p class="text-blue-400 font-medium tracking-[0.2em] text-[10px] uppercase">
+                        Tabela Unificada • Atacado & Varejo 2026
+                    </p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-6 text-center border-l border-slate-700 pl-6 hidden lg:grid">
+                <div class="flex flex-col items-center">
+                    <svg class="text-blue-400 mb-1 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <span class="text-[8px] font-bold uppercase tracking-tighter leading-none">Qualidade<br>Certificada</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <svg class="text-yellow-400 mb-1 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                    <span class="text-[8px] font-bold uppercase tracking-tighter leading-none">Fusível<br>Reserva</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <svg class="text-green-400 mb-1 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                    <span class="text-[8px] font-bold uppercase tracking-tighter leading-none">Envio<br>Nacional</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 md:px-6 -mt-4">
+        <!-- Banner de Condições -->
+        <div class="bg-blue-600 text-white rounded-xl p-3 shadow-xl flex flex-col md:flex-row items-center justify-center gap-4 mb-8 text-center border-b-4 border-blue-800">
+            <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                <p class="text-[10px] font-black uppercase tracking-wide">B2B • @filtrodelinhabr</p>
+            </div>
+            <div class="flex items-center gap-2 text-yellow-200">
+                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                <p class="text-[10px] font-black uppercase tracking-tight">Primeiro pedido: PIX</p>
+            </div>
+            <div class="flex items-center gap-2 text-red-100">
+                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                <p class="text-[10px] font-black uppercase tracking-tight italic">Nota Fiscal: +10% no valor</p>
+            </div>
+        </div>
+
+        <!-- TABELA UNIFICADA -->
+        <section class="mb-10">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-4 gap-4">
+                <h2 class="text-lg font-black text-slate-900 flex items-center gap-2 uppercase tracking-tight">
+                    <span class="w-6 h-1 bg-blue-600 rounded-full"></span>
+                    Tabela de Preços e Condições
+                </h2>
+                <div class="flex gap-4 no-print">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 bg-blue-600 rounded-sm"></span>
+                        <span class="text-[9px] font-bold text-slate-500 uppercase">Preço Atacado</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 bg-slate-300 rounded-sm"></span>
+                        <span class="text-[9px] font-bold text-slate-500 uppercase">Preço Unid. Avulsa</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile View: Cards -->
+            <div id="cards-container" class="grid grid-cols-1 gap-4 md:hidden">
+                <!-- Inserido via Script -->
+            </div>
+
+            <!-- Desktop View: Unified Table -->
+            <div class="hidden md:block bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-[11px] table-fixed">
+                        <thead>
+                            <tr class="bg-slate-900 text-white">
+                                <th class="p-4 font-bold uppercase tracking-widest border-r border-slate-800 col-modelo">Modelo do Produto</th>
+                                <th class="p-4 font-bold uppercase tracking-widest text-center border-r border-slate-800 col-precos">Cabo 1,1m</th>
+                                <th class="p-4 font-bold uppercase tracking-widest text-center border-r border-slate-800 col-precos">Cabo 3,0m</th>
+                                <th class="p-4 font-bold uppercase tracking-widest text-center border-r border-slate-800 col-precos">Cabo 5,0m</th>
+                                <th class="p-4 font-bold uppercase tracking-widest text-center bg-blue-700 col-master">Cx. Master</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body" class="text-slate-700">
+                            <!-- Inserido via Script -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rodapé Comercial -->
+        <footer class="mt-8 bg-white border border-slate-200 rounded-2xl p-6 flex flex-col lg:flex-row justify-between items-center gap-8 shadow-sm">
+            <div class="flex-1 text-center lg:text-left">
+                <h4 class="font-black text-slate-900 uppercase mb-3 text-xs tracking-widest">Informações Importantes</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-1.5 text-[10px] text-slate-600">
+                    <p class="flex items-center gap-2">• Todos os modelos com fusível reserva.</p>
+                    <p class="font-black text-blue-700 uppercase">→ Melhor preço na Caixa Master.</p>
+                    <p>• Cabos 0,75mm² certificados pelo Inmetro.</p>
+                    <p class="font-black text-red-600 tracking-tighter uppercase">• Nota Fiscal Completa (+10% no valor).</p>
+                    <p class="font-bold text-slate-900 uppercase tracking-tighter">• Pagamento: Primeiro pedido via PIX.</p>
+                    <p>• Faturamento disponível para CNPJ (Sob análise).</p>
+                </div>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                <div class="bg-slate-900 text-white px-6 py-4 rounded-xl shadow-lg border-b-4 border-blue-600 text-center flex-1 min-w-[180px]">
+                    <p class="text-[8px] font-black text-blue-400 uppercase mb-1 tracking-widest italic">WhatsApp</p>
+                    <span class="text-lg font-black block tracking-tighter italic">11 95494-1312</span>
+                </div>
+                <div class="bg-slate-800 text-white px-6 py-4 rounded-xl shadow-lg border-b-4 border-slate-600 text-center flex-1 min-w-[180px]">
+                    <p class="text-[8px] font-black text-slate-400 uppercase mb-1 tracking-widest italic">Instagram</p>
+                    <span class="text-lg font-black block text-blue-400 tracking-tighter italic">@filtrodelinhabr</span>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <div class="text-center mt-6 text-slate-400 text-[8px] uppercase font-bold tracking-[0.4em]">
+        Fábrica de Filtros de Linha • Atibaia - SP • 2026
+    </div>
+
+    <script>
+        const products = [
+            {
+                name: "Filtro 3 Tomadas ABS",
+                master: "20",
+                masterPrices: { c1: "22,90", c3: "26,90", c5: "34,90" },
+                unitPrices: { c1: "24,90", c3: "28,90", c5: "36,90" }
+            },
+            {
+                name: "Filtro 4 Tomadas ABS",
+                master: "20",
+                masterPrices: { c1: "24,50", c3: "29,50", c5: "38,50" },
+                unitPrices: { c1: "26,50", c3: "31,50", c5: "40,50" }
+            },
+            {
+                name: "Filtro 5 Tomadas ABS",
+                master: "20",
+                masterPrices: { c1: "25,90", c3: "29,90", c5: "38,90" },
+                unitPrices: { c1: "27,90", c3: "31,90", c5: "40,90" }
+            },
+            {
+                name: "Filtro 6 Tomadas ABS",
+                master: "16",
+                masterPrices: { c1: "31,10", c3: "35,25", c5: "39,25" },
+                unitPrices: { c1: "33,10", c3: "37,25", c5: "41,25" }
+            },
+            {
+                name: "Filtro 6 Tomadas Metal",
+                master: "12",
+                masterPrices: { c1: "43,00", c3: "47,00", c5: "51,00" },
+                unitPrices: { c1: "45,00", c3: "49,00", c5: "53,00" }
+            },
+            {
+                name: "Filtro 8 Tomadas Metal",
+                master: "10",
+                masterPrices: { c1: "52,00", c3: "56,00", c5: "60,00" },
+                unitPrices: { c1: "54,00", c3: "58,00", c5: "62,00" }
+            },
+            {
+                name: "Filtro 10 Tomadas Metal",
+                master: "8",
+                masterPrices: { c1: "59,00", c3: "64,00", c5: "68,00" },
+                unitPrices: { c1: "61,00", c3: "66,00", c5: "70,00" }
+            }
+        ];
+
+        function renderContent() {
+            const tableBody = document.getElementById('table-body');
+            const cardsContainer = document.getElementById('cards-container');
+
+            products.forEach((p, idx) => {
+                const isMetal = p.name.includes('Metal');
+                const rowClass = idx % 2 === 0 ? 'bg-white' : 'bg-slate-50';
+                const accentColor = isMetal ? 'text-orange-700' : 'text-slate-900';
+
+                // Desktop View Row
+                tableBody.innerHTML += `
+                    <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition-colors ${rowClass}">
+                        <td class="p-4 border-r border-slate-100 font-black uppercase tracking-tighter ${accentColor}">
+                            ${p.name}
+                        </td>
+                        ${['c1', 'c3', 'c5'].map(key => `
+                            <td class="p-4 text-center border-r border-slate-100">
+                                <div class="flex flex-col gap-0.5">
+                                    <span class="text-[12px] font-black text-blue-700 font-mono tracking-tight">R$ ${p.masterPrices[key]}</span>
+                                    <span class="text-[9px] font-bold text-slate-400 font-mono tracking-tight">R$ ${p.unitPrices[key]}</span>
+                                </div>
+                            </td>
+                        `).join('')}
+                        <td class="p-4 text-center font-black bg-blue-50/50 text-slate-900">
+                            <div class="flex items-center justify-center gap-1.5 uppercase text-[10px]">
+                                <svg class="w-3 h-3 text-blue-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-2-2H5L3 8v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"></path><path d="M3 10h18"></path><path d="M10 14h4"></path></svg>
+                                ${p.master} un
+                            </div>
+                        </td>
+                    </tr>
+                `;
+
+                // Mobile View Card
+                cardsContainer.innerHTML += `
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 border-l-4 ${isMetal ? 'border-l-orange-500' : 'border-l-slate-800'}">
+                        <div class="flex justify-between items-center mb-3 border-b pb-2 border-slate-50">
+                            <span class="font-black uppercase text-xs tracking-tighter ${accentColor}">${p.name}</span>
+                            <span class="bg-blue-600 text-white text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">${p.master} UNIDADES</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 text-center">
+                            ${[
+                                {label: '1.1m', key: 'c1'},
+                                {label: '3.0m', key: 'c3'},
+                                {label: '5.0m', key: 'c5'}
+                            ].map(c => `
+                                <div class="flex flex-col border-r last:border-0 border-slate-50">
+                                    <span class="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1">${c.label}</span>
+                                    <span class="text-[11px] font-black text-blue-700 font-mono leading-none">R$ ${p.masterPrices[c.key]}</span>
+                                    <span class="text-[8px] font-bold text-slate-300 font-mono mt-1">R$ ${p.unitPrices[c.key]}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        window.onload = renderContent;
+    </script>
+</body>
+</html>
