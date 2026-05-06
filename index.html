@@ -20,11 +20,29 @@
         .col-precos { width: 20%; }
         .col-master { width: 15%; }
 
-        /* Estilo para inputs de quantidade */
+        /* Estilo para posts Instagram */
+        #post-preview {
+            width: 1080px;
+            height: 1080px;
+            max-width: 100%;
+            aspect-ratio: 1 / 1;
+        }
+
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { 
             -webkit-appearance: none; 
             margin: 0; 
+        }
+
+        /* Animação de entrada do carrinho */
+        .cart-active {
+            animation: pulse-blue 0.5s ease-in-out;
+        }
+
+        @keyframes pulse-blue {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); background-color: #2563eb; }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
@@ -45,25 +63,29 @@
                 </div>
             </div>
             
-            <div class="flex gap-4 no-print">
+            <div class="flex gap-3 no-print">
+                <button onclick="toggleInstagramMode()" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition shadow-lg">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    MODO CRIADOR DE POSTS
+                </button>
                 <button onclick="exportToPDF()" class="hidden md:flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                    PDF (PAISAGEM)
+                    PDF
                 </button>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 md:px-6 -mt-4">
+    <main id="main-catalog" class="max-w-7xl mx-auto px-4 md:px-6 -mt-4">
         <!-- Banner de Condições -->
         <div class="bg-blue-600 text-white rounded-xl p-3 shadow-xl flex flex-col md:flex-row items-center justify-center gap-4 mb-8 text-center border-b-4 border-blue-800">
-            <div class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            <div class="flex items-center gap-2 text-white">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
                 <p class="text-[10px] font-black uppercase tracking-wide">B2B • @filtrodelinhabr</p>
             </div>
             <div class="flex items-center gap-2 text-yellow-200">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-                <p class="text-[10px] font-black uppercase tracking-tight">Primeiro pedido: PIX</p>
+                <p class="text-[10px] font-black uppercase tracking-tight">Primeiro pedido: Somente PIX</p>
             </div>
             <div class="flex items-center gap-2 text-red-100">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
@@ -83,12 +105,8 @@
                 </div>
             </div>
             
-            <!-- Mobile: Lista de Cards com inputs -->
-            <div id="cards-container" class="grid grid-cols-1 gap-4 md:hidden no-print">
-                <!-- Gerado via JS -->
-            </div>
+            <div id="cards-container" class="grid grid-cols-1 gap-4 md:hidden no-print"></div>
 
-            <!-- Desktop: Tabela Unificada com inputs -->
             <div class="hidden md:block bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-[11px] table-fixed border-collapse">
@@ -101,9 +119,7 @@
                                 <th class="p-4 font-bold uppercase tracking-widest text-center bg-blue-700 col-master">Mín. Caixa</th>
                             </tr>
                         </thead>
-                        <tbody id="table-body" class="text-slate-700">
-                            <!-- Gerado via JS -->
-                        </tbody>
+                        <tbody id="table-body" class="text-slate-700"></tbody>
                     </table>
                 </div>
             </div>
@@ -121,16 +137,71 @@
                     <p>• Faturamento para CNPJ sob análise.</p>
                 </div>
             </div>
-            <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-                <div class="bg-slate-900 text-white px-6 py-4 rounded-xl shadow-lg border-b-4 border-blue-600 text-center flex-1 min-w-[160px]">
-                    <p class="text-[8px] font-black text-blue-400 uppercase mb-1 tracking-widest">WhatsApp</p>
-                    <span class="text-lg font-black block tracking-tighter italic">11 95494-1312</span>
-                </div>
+            <div class="bg-slate-900 text-white px-6 py-4 rounded-xl shadow-lg border-b-4 border-blue-600 text-center min-w-[180px]">
+                <p class="text-[8px] font-black text-blue-400 uppercase mb-1 tracking-widest">WhatsApp</p>
+                <span class="text-lg font-black block tracking-tighter italic">11 95494-1312</span>
             </div>
         </footer>
     </main>
 
-    <!-- Carrinho Flutuante (Apenas Mobile/Web, oculto em print) -->
+    <!-- ÁREA DE PREVIEW PARA INSTAGRAM (MODAL) -->
+    <div id="instagram-modal" class="hidden fixed inset-0 z-[100] bg-slate-900/95 flex items-center justify-center p-4">
+        <div class="max-w-4xl w-full flex flex-col gap-4">
+            <div class="flex justify-between items-center text-white">
+                <h2 class="font-black uppercase tracking-widest">Gerador de Banner Instagram</h2>
+                <button onclick="toggleInstagramMode()" class="bg-red-600 px-4 py-2 rounded font-bold text-xs">FECHAR</button>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="bg-slate-800 p-4 rounded-xl flex-1 text-white space-y-4">
+                    <label class="block text-[10px] font-black text-slate-400 uppercase">1. Escolha o Produto</label>
+                    <select id="insta-prod-select" onchange="updatePostPreview()" class="w-full bg-slate-900 border border-slate-700 p-2 rounded text-sm"></select>
+                    
+                    <label class="block text-[10px] font-black text-slate-400 uppercase mt-4">2. Tamanho do Cabo</label>
+                    <div class="flex gap-2">
+                        <button onclick="setInstaCable('c1')" class="bg-blue-600 px-3 py-1 rounded text-[10px] font-bold">1,1m</button>
+                        <button onclick="setInstaCable('c3')" class="bg-slate-700 px-3 py-1 rounded text-[10px] font-bold">3,0m</button>
+                        <button onclick="setInstaCable('c5')" class="bg-slate-700 px-3 py-1 rounded text-[10px] font-bold">5,0m</button>
+                    </div>
+
+                    <div class="mt-8 p-4 bg-blue-900/30 rounded border border-blue-800 text-[10px] italic text-blue-300">
+                        Dica: Use a ferramenta de captura (print) do seu computador na área ao lado para salvar a imagem.
+                    </div>
+                </div>
+
+                <div id="post-preview" class="bg-slate-900 border-[12px] border-white relative overflow-hidden flex flex-col shadow-2xl">
+                    <div class="p-12 flex justify-between items-start w-full">
+                        <div class="bg-white p-4 rounded-2xl w-32 h-32 flex items-center justify-center shadow-2xl">
+                            <img src="image_6acbb3.png" class="max-w-full max-h-full object-contain">
+                        </div>
+                        <div class="text-right">
+                            <span class="text-blue-400 font-black text-2xl uppercase italic tracking-tighter block">PREÇO DE FÁBRICA</span>
+                            <span class="text-white font-black text-4xl uppercase tracking-widest block">ATACADO 2026</span>
+                        </div>
+                    </div>
+                    <div class="flex-grow flex flex-col justify-center px-12">
+                        <h2 id="insta-name" class="text-white font-black text-7xl uppercase italic leading-none mb-6">PRODUTO</h2>
+                        <div class="flex items-center gap-6">
+                            <div class="bg-blue-600 px-6 py-2 rounded-full text-white font-black text-2xl" id="insta-cable">CABO 1,1M</div>
+                            <div class="text-slate-400 font-bold text-2xl uppercase tracking-widest" id="insta-min">MÍNIMO 20 UN</div>
+                        </div>
+                    </div>
+                    <div class="p-12 bg-white flex justify-between items-center">
+                        <div class="flex flex-col">
+                            <span class="text-slate-400 font-black text-xl uppercase">Valor Atacado</span>
+                            <span id="insta-price" class="text-slate-900 font-black text-8xl font-mono leading-none tracking-tighter">R$ 00,00</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-blue-600 font-black text-2xl block">WHATSAPP</span>
+                            <span class="text-slate-900 font-black text-4xl block">11 95494-1312</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carrinho Flutuante -->
     <div id="cart-drawer" class="fixed bottom-0 left-0 right-0 z-50 no-print transition-transform transform translate-y-full">
         <div class="bg-white border-t border-slate-200 shadow-2xl p-4 md:max-w-md md:mx-auto md:mb-4 md:rounded-2xl md:border">
             <div class="flex items-center justify-between mb-3 border-b pb-2">
@@ -142,21 +213,18 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
                 </button>
             </div>
-            <div id="cart-items" class="max-h-48 overflow-y-auto mb-4 space-y-2 text-[10px]">
-                <!-- Itens do carrinho -->
-            </div>
+            <div id="cart-items" class="max-h-48 overflow-y-auto mb-4 space-y-2 text-[10px]"></div>
             <div class="flex items-center justify-between mb-4 px-2">
                 <span class="text-xs font-bold text-slate-500 uppercase">Subtotal Estimado:</span>
                 <span id="cart-total" class="text-lg font-black text-blue-700 font-mono italic">R$ 0,00</span>
             </div>
             <button onclick="sendWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white font-black py-3 rounded-xl shadow-lg flex items-center justify-center gap-3 transition transform active:scale-95">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                 ENVIAR PEDIDO POR WHATSAPP
             </button>
         </div>
     </div>
 
-    <!-- Botão Ativar Carrinho (Sticky) -->
+    <!-- Badge de Carrinho -->
     <button id="cart-badge" onclick="toggleCart()" class="fixed bottom-6 right-6 z-40 bg-blue-600 text-white p-4 rounded-full shadow-2xl no-print hover:scale-110 transition-transform flex items-center gap-3">
         <div class="relative">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
@@ -176,190 +244,174 @@
             { id: 7, name: "Filtro 10 Tomadas Metal", master: 8, masterPrices: { c1: 59.00, c3: 64.00, c5: 68.00 }, unitPrices: { c1: 61.00, c3: 66.00, c5: 70.00 } }
         ];
 
-        let cart = {}; // { "id-cable": quantity }
-        let isCartOpen = false;
+        let cart = {};
+        let currentInstaCable = 'c1';
 
         function renderContent() {
             const tableBody = document.getElementById('table-body');
             const cardsContainer = document.getElementById('cards-container');
+            const select = document.getElementById('insta-prod-select');
 
             products.forEach((p, idx) => {
                 const isMetal = p.name.includes('Metal');
                 const rowClass = idx % 2 === 0 ? 'bg-white' : 'bg-slate-50';
                 const accentColor = isMetal ? 'text-orange-700' : 'text-slate-900';
 
-                // Render Desktop
+                // Tabela Desktop
                 tableBody.innerHTML += `
                     <tr class="border-b border-slate-100 ${rowClass}">
-                        <td class="p-4 border-r border-slate-100 font-black uppercase tracking-tighter ${accentColor}">
-                            ${p.name}
-                        </td>
-                        ${['c1', 'c3', 'c5'].map(cable => {
-                            const cableName = cable === 'c1' ? '1,1m' : cable === 'c3' ? '3,0m' : '5,0m';
-                            const cartKey = `${p.id}-${cable}`;
-                            return `
+                        <td class="p-4 border-r border-slate-100 font-black uppercase tracking-tighter ${accentColor}">${p.name}</td>
+                        ${['c1', 'c3', 'c5'].map(cable => `
                             <td class="p-2 text-center border-r border-slate-100">
                                 <div class="flex flex-col gap-1 items-center mb-2">
-                                    <span class="text-[13px] font-black text-blue-700 font-mono leading-none">R$ ${p.masterPrices[cable].toFixed(2)}</span>
-                                    <span class="text-[11px] font-bold text-slate-400 font-mono leading-none italic">R$ ${p.unitPrices[cable].toFixed(2)}</span>
+                                    <span class="text-[16px] font-black text-blue-700 font-mono leading-none">R$ ${p.masterPrices[cable].toFixed(2)}</span>
+                                    <span class="text-[13px] font-bold text-slate-400 font-mono leading-none italic mt-1">R$ ${p.unitPrices[cable].toFixed(2)}</span>
                                 </div>
-                                <div class="flex items-center justify-center no-print bg-slate-100 p-1 rounded-lg w-fit mx-auto border border-slate-200">
-                                    <button onclick="updateQty('${cartKey}', -1)" class="w-6 h-6 flex items-center justify-center bg-white rounded-md shadow-sm hover:bg-red-50 text-slate-500 font-bold">-</button>
-                                    <input type="number" id="qty-${cartKey}" value="${cart[cartKey] || 0}" min="0" onchange="setQty('${cartKey}', this.value)" class="w-10 text-center bg-transparent font-black text-slate-900 text-[10px]">
-                                    <button onclick="updateQty('${cartKey}', 1)" class="w-6 h-6 flex items-center justify-center bg-white rounded-md shadow-sm hover:bg-blue-50 text-slate-500 font-bold">+</button>
+                                <div class="flex flex-col gap-1 items-center no-print">
+                                    <div class="flex items-center bg-slate-100 p-1 rounded-lg w-fit mx-auto border border-slate-200">
+                                        <button onclick="updateQty('${p.id}-${cable}', -1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm text-slate-400 hover:text-red-500">-</button>
+                                        <input type="number" id="qty-${p.id}-${cable}" value="${cart[`${p.id}-${cable}`] || 0}" class="w-8 text-center bg-transparent font-black text-[10px]">
+                                        <button onclick="updateQty('${p.id}-${cable}', 1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm text-blue-600 hover:bg-blue-50">+</button>
+                                    </div>
+                                    <button onclick="addBox('${p.id}-${cable}')" class="text-[8px] font-black text-blue-600 bg-blue-50 hover:bg-blue-100 px-2 py-0.5 rounded border border-blue-200 transition-colors">+ CAIXA</button>
                                 </div>
-                            </td>`;
-                        }).join('')}
-                        <td class="p-4 text-center font-black bg-blue-50/50 text-slate-900">
-                            <div class="flex items-center justify-center gap-1.5 uppercase text-[10px]">
-                                <svg class="w-3 h-3 text-blue-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M21 8l-2-2H5L3 8v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"></path><path d="M3 10h18"></path><path d="M10 14h4"></path></svg>
-                                ${p.master} un
-                            </div>
-                        </td>
+                            </td>`).join('')}
+                        <td class="p-4 text-center font-black bg-blue-50/50">${p.master} un</td>
                     </tr>
                 `;
 
-                // Render Mobile
+                // Mobile
                 cardsContainer.innerHTML += `
-                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 border-l-4 ${isMetal ? 'border-l-orange-500' : 'border-l-slate-800'}">
-                        <div class="flex justify-between items-center mb-4 border-b pb-2 border-slate-50">
-                            <span class="font-black uppercase text-xs tracking-tighter ${accentColor}">${p.name}</span>
-                            <span class="bg-blue-100 text-blue-700 text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">${p.master} UNID/CAIXA</span>
+                    <div class="bg-white rounded-xl border border-slate-200 p-4 border-l-4 ${isMetal ? 'border-l-orange-500' : 'border-l-slate-800'}">
+                        <div class="flex justify-between mb-4 border-b pb-2">
+                            <span class="font-black uppercase text-xs ${accentColor}">${p.name}</span>
+                            <span class="bg-blue-600 text-white text-[9px] font-black px-2 py-1 rounded">${p.master} UNID/CX</span>
                         </div>
-                        <div class="grid grid-cols-1 gap-4">
-                            ${[{l: '1,1m', k: 'c1'}, {l: '3,0m', k: 'c3'}, {l: '5,0m', k: 'c5'}].map(item => {
-                                const cartKey = `${p.id}-${item.k}`;
-                                return `
+                        <div class="grid grid-cols-1 gap-5">
+                            ${[{l:'1,1m',k:'c1'},{l:'3,0m',k:'c3'},{l:'5,0m',k:'c5'}].map(c => `
                                 <div class="flex items-center justify-between">
                                     <div class="flex flex-col">
-                                        <span class="text-[10px] font-black text-slate-400 uppercase leading-none">Cabo ${item.l}</span>
-                                        <div class="flex gap-2 mt-1">
-                                            <span class="text-[14px] font-black text-blue-700">R$ ${p.masterPrices[item.k].toFixed(2)}</span>
-                                            <span class="text-[12px] font-bold text-slate-300 italic">R$ ${p.unitPrices[item.k].toFixed(2)}</span>
+                                        <span class="text-[9px] font-black text-slate-400 uppercase leading-none mb-1">${c.l}</span>
+                                        <span class="text-[16px] font-black text-blue-700">R$ ${p.masterPrices[c.k].toFixed(2)}</span>
+                                        <span class="text-[12px] font-bold text-slate-300 italic leading-none">R$ ${p.unitPrices[c.k].toFixed(2)}</span>
+                                    </div>
+                                    <div class="flex flex-col items-end gap-1">
+                                        <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200">
+                                            <button onclick="updateQty('${p.id}-${c.k}', -1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm text-slate-400">-</button>
+                                            <input type="number" id="mqty-${p.id}-${c.k}" value="${cart[`${p.id}-${c.k}`] || 0}" class="w-10 text-center bg-transparent font-black text-sm">
+                                            <button onclick="updateQty('${p.id}-${c.k}', 1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm text-blue-600">+</button>
                                         </div>
+                                        <button onclick="addBox('${p.id}-${c.k}')" class="text-[9px] font-black text-blue-700 bg-blue-50 px-3 py-1 rounded-lg border border-blue-100">+ ADICIONAR CAIXA</button>
                                     </div>
-                                    <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200">
-                                        <button onclick="updateQty('${cartKey}', -1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm text-slate-400">-</button>
-                                        <input type="number" id="mqty-${cartKey}" value="${cart[cartKey] || 0}" class="w-12 text-center bg-transparent font-black text-slate-900 text-sm">
-                                        <button onclick="updateQty('${cartKey}', 1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm text-blue-600">+</button>
-                                    </div>
-                                </div>`;
-                            }).join('')}
+                                </div>`).join('')}
                         </div>
                     </div>
                 `;
+
+                select.innerHTML += `<option value="${p.id}">${p.name}</option>`;
             });
+            updatePostPreview();
+        }
+
+        // Função para adicionar uma caixa master inteira de uma vez
+        function addBox(key) {
+            const [id, cable] = key.split('-');
+            const p = products.find(prod => prod.id == id);
+            const masterQty = p.master;
+            
+            // Adiciona a quantidade da caixa master ao que já existe
+            updateQty(key, masterQty);
+            
+            // Feedback visual no botão do carrinho
+            const badge = document.getElementById('cart-badge');
+            badge.classList.add('cart-active');
+            setTimeout(() => badge.classList.remove('cart-active'), 500);
         }
 
         function updateQty(key, delta) {
-            const current = cart[key] || 0;
-            const newVal = Math.max(0, current + delta);
-            setQty(key, newVal);
-        }
-
-        function setQty(key, val) {
-            const quantity = parseInt(val) || 0;
-            if (quantity <= 0) {
-                delete cart[key];
-            } else {
-                cart[key] = quantity;
-            }
-            updateUI(key);
+            cart[key] = Math.max(0, (cart[key] || 0) + delta);
+            const inputD = document.getElementById(`qty-${key}`);
+            const inputM = document.getElementById(`mqty-${key}`);
+            if(inputD) inputD.value = cart[key];
+            if(inputM) inputM.value = cart[key];
             updateCartSummary();
         }
 
-        function updateUI(key) {
-            const inputs = [`qty-${key}`, `mqty-${key}`];
-            inputs.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.value = cart[key] || 0;
-            });
+        function toggleCart() {
+            const d = document.getElementById('cart-drawer');
+            d.style.transform = d.style.transform === 'translateY(0%)' ? 'translateY(100%)' : 'translateY(0%)';
+        }
+
+        function toggleInstagramMode() {
+            const m = document.getElementById('instagram-modal');
+            m.classList.toggle('hidden');
+        }
+
+        function setInstaCable(c) {
+            currentInstaCable = c;
+            updatePostPreview();
+        }
+
+        function updatePostPreview() {
+            const id = document.getElementById('insta-prod-select').value;
+            const p = products.find(prod => prod.id == id);
+            document.getElementById('insta-name').innerText = p.name;
+            document.getElementById('insta-cable').innerText = `CABO ${currentInstaCable === 'c1' ? '1,1M' : currentInstaCable === 'c3' ? '3,0M' : '5,0M'}`;
+            document.getElementById('insta-min').innerText = `MÍNIMO ${p.master} UN`;
+            document.getElementById('insta-price').innerText = `R$ ${p.masterPrices[currentInstaCable].toFixed(2)}`;
         }
 
         function updateCartSummary() {
             const list = document.getElementById('cart-items');
-            const totalEl = document.getElementById('cart-total');
-            const countEl = document.getElementById('cart-count');
-            const drawer = document.getElementById('cart-drawer');
-            
+            const count = document.getElementById('cart-count');
             list.innerHTML = "";
             let total = 0;
-            let totalItems = 0;
-
-            Object.keys(cart).forEach(key => {
-                const [id, cable] = key.split('-');
-                const p = products.find(prod => prod.id == id);
-                const qty = cart[key];
-                
-                // Determina preço (usa atacado se atingir a caixa master)
-                const price = qty >= p.master ? p.masterPrices[cable] : p.unitPrices[cable];
-                const sub = price * qty;
-                total += sub;
-                totalItems += qty;
-
-                const cableLabel = cable === 'c1' ? '1,1m' : cable === 'c3' ? '3,0m' : '5,0m';
-
-                list.innerHTML += `
-                    <div class="flex items-center justify-between border-b border-slate-50 pb-1">
-                        <div class="flex flex-col">
-                            <span class="font-bold text-slate-800 uppercase">${p.name}</span>
-                            <span class="text-[8px] text-slate-400">Cabo ${cableLabel} • ${qty >= p.master ? 'Preço Atacado' : 'Preço Unitário'}</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="font-black text-slate-500">${qty}x</span>
-                            <span class="font-bold text-blue-600">R$ ${sub.toFixed(2)}</span>
-                        </div>
-                    </div>
-                `;
+            let items = 0;
+            Object.keys(cart).forEach(k => {
+                if(cart[k] > 0) {
+                    const [id, cable] = k.split('-');
+                    const p = products.find(prod => prod.id == id);
+                    const qty = cart[k];
+                    const price = qty >= p.master ? p.masterPrices[cable] : p.unitPrices[cable];
+                    total += price * qty;
+                    items += qty;
+                    list.innerHTML += `
+                        <div class="flex justify-between items-center border-b border-slate-50 pb-1">
+                            <div class="flex flex-col">
+                                <span class="font-black text-slate-800">${p.name} (${cable.replace('c1','1.1m').replace('c3','3m').replace('c5','5m')})</span>
+                                <span class="text-[8px] text-blue-600 font-bold uppercase">${qty >= p.master ? 'Preço Atacado' : 'Preço Unitário'}</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-black text-slate-400 mr-2">${qty}x</span>
+                                <span class="font-black text-slate-900">R$ ${(price*qty).toFixed(2)}</span>
+                            </div>
+                        </div>`;
+                }
             });
-
-            totalEl.innerText = `R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-            countEl.innerText = totalItems;
-
-            if (totalItems > 0 && !isCartOpen) {
-                // Notifica que tem item se o carrinho estiver fechado mas tiver mudado
-            }
-        }
-
-        function toggleCart() {
-            const drawer = document.getElementById('cart-drawer');
-            isCartOpen = !isCartOpen;
-            drawer.style.transform = isCartOpen ? 'translateY(0)' : 'translateY(100%)';
+            count.innerText = items;
+            document.getElementById('cart-total').innerText = `R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
         }
 
         function sendWhatsApp() {
-            const phoneNumber = "5511954941312";
-            let message = "*NOVO PEDIDO - FÁBRICA DE FILTROS*\n\n";
+            const phone = "5511954941312";
+            let msg = "*SOLICITAÇÃO DE ORÇAMENTO - FÁBRICA*\n\n";
             let total = 0;
-
-            Object.keys(cart).forEach(key => {
-                const [id, cable] = key.split('-');
-                const p = products.find(prod => prod.id == id);
-                const qty = cart[key];
-                const cableLabel = cable === 'c1' ? '1,1m' : cable === 'c3' ? '3,0m' : '5,0m';
-                const price = qty >= p.master ? p.masterPrices[cable] : p.unitPrices[cable];
-                const sub = price * qty;
-                total += sub;
-
-                message += `📦 *${p.name}*\n`;
-                message += `📏 Cabo: ${cableLabel}\n`;
-                message += `🔢 Qtd: ${qty} un\n`;
-                message += `💰 Unit: R$ ${price.toFixed(2)} (${qty >= p.master ? 'Atacado' : 'Avulso'})\n`;
-                message += `💵 Subtotal: *R$ ${sub.toFixed(2)}*\n\n`;
+            Object.keys(cart).forEach(k => {
+                if(cart[k] > 0) {
+                    const [id, cable] = k.split('-');
+                    const p = products.find(prod => prod.id == id);
+                    const qty = cart[k];
+                    const label = cable.replace('c1','1.1m').replace('c3','3m').replace('c5','5m');
+                    const price = qty >= p.master ? p.masterPrices[cable] : p.unitPrices[cable];
+                    total += price * qty;
+                    msg += `📦 *${p.name}*\n📏 Cabo: ${label}\n🔢 Qtd: ${qty} un (${qty >= p.master ? 'Atacado' : 'Avulso'})\n💰 Subtotal: R$ ${(price*qty).toFixed(2)}\n\n`;
+                }
             });
-
-            message += `------------------------\n`;
-            message += `⚡ *TOTAL ESTIMADO: R$ ${total.toFixed(2)}*\n\n`;
-            message += `_O faturamento oficial será realizado pelo consultor comercial._`;
-
-            const encoded = encodeURIComponent(message);
-            window.open(`https://wa.me/${phoneNumber}?text=${encoded}`);
+            msg += `--------------------------\n⚡ *TOTAL ESTIMADO: R$ ${total.toFixed(2)}*`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
         }
 
-        function exportToPDF() {
-            window.print();
-        }
-
+        function exportToPDF() { window.print(); }
         window.onload = renderContent;
     </script>
 </body>
