@@ -20,21 +20,12 @@
         .col-precos { width: 20%; }
         .col-master { width: 15%; }
 
-        /* Estilo para posts Instagram */
-        #post-preview {
-            width: 1080px;
-            height: 1080px;
-            max-width: 100%;
-            aspect-ratio: 1 / 1;
-        }
-
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { 
             -webkit-appearance: none; 
             margin: 0; 
         }
 
-        /* Animação de entrada do carrinho */
         .cart-active {
             animation: pulse-blue 0.5s ease-in-out;
         }
@@ -44,6 +35,18 @@
             50% { transform: scale(1.1); background-color: #2563eb; }
             100% { transform: scale(1); }
         }
+
+        /* Loading Spinner */
+        .loader {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 pb-24 md:pb-12">
@@ -66,10 +69,10 @@
             <div class="flex gap-3 no-print">
                 <button onclick="toggleInstagramMode()" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition shadow-lg">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    MODO CRIADOR DE POSTS
+                    CRIADOR DE POSTS
                 </button>
                 <button onclick="exportToPDF()" class="hidden md:flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     PDF
                 </button>
             </div>
@@ -163,10 +166,6 @@
                         <button onclick="setInstaCable('c3')" class="bg-slate-700 px-3 py-1 rounded text-[10px] font-bold">3,0m</button>
                         <button onclick="setInstaCable('c5')" class="bg-slate-700 px-3 py-1 rounded text-[10px] font-bold">5,0m</button>
                     </div>
-
-                    <div class="mt-8 p-4 bg-blue-900/30 rounded border border-blue-800 text-[10px] italic text-blue-300">
-                        Dica: Use a ferramenta de captura (print) do seu computador na área ao lado para salvar a imagem.
-                    </div>
                 </div>
 
                 <div id="post-preview" class="bg-slate-900 border-[12px] border-white relative overflow-hidden flex flex-col shadow-2xl">
@@ -209,15 +208,41 @@
                     <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     Resumo do Pedido
                 </h3>
-                <button onclick="toggleCart()" class="text-slate-400 hover:text-slate-600">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                <button onclick="toggleCart()" class="text-slate-400 hover:text-slate-600 p-1">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
                 </button>
             </div>
-            <div id="cart-items" class="max-h-48 overflow-y-auto mb-4 space-y-2 text-[10px]"></div>
-            <div class="flex items-center justify-between mb-4 px-2">
-                <span class="text-xs font-bold text-slate-500 uppercase">Subtotal Estimado:</span>
-                <span id="cart-total" class="text-lg font-black text-blue-700 font-mono italic">R$ 0,00</span>
+
+            <!-- Entrada de Frete (CEP) -->
+            <div class="mb-4 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                <label class="block text-[8px] font-black text-slate-400 uppercase mb-1">Cálculo de Frete (Melhor Envio)</label>
+                <div class="flex gap-2">
+                    <input type="text" id="destination-cep" maxlength="9" placeholder="Digite o CEP (00000-000)" class="flex-grow bg-white border border-slate-200 p-2 rounded text-xs font-bold focus:ring-2 focus:ring-blue-500 uppercase">
+                    <button onclick="calculateFreightAPI()" id="btn-calc-freight" class="bg-slate-800 text-white px-4 py-2 rounded text-[10px] font-black hover:bg-slate-700 transition">CALCULAR</button>
+                </div>
+                <div id="freight-options" class="mt-3 hidden space-y-2">
+                    <!-- Opções de transportadora aparecerão aqui -->
+                </div>
             </div>
+
+            <div id="cart-items" class="max-h-32 overflow-y-auto mb-4 space-y-2 text-[10px]"></div>
+            
+            <!-- Resumo de Valores -->
+            <div class="space-y-1 mb-4 px-2 border-t pt-2">
+                <div class="flex justify-between text-[10px]">
+                    <span class="text-slate-400 font-bold uppercase">Itens:</span>
+                    <span id="cart-subtotal" class="font-mono font-bold text-slate-600">R$ 0,00</span>
+                </div>
+                <div class="flex justify-between text-[10px]">
+                    <span class="text-slate-400 font-bold uppercase">Frete (<span id="selected-service-name">---</span>):</span>
+                    <span id="cart-freight" class="font-mono font-bold text-green-600">R$ 0,00</span>
+                </div>
+                <div class="flex items-center justify-between pt-1 border-t">
+                    <span class="text-xs font-black text-slate-800 uppercase">Total do Pedido:</span>
+                    <span id="cart-total" class="text-xl font-black text-blue-700 font-mono italic">R$ 0,00</span>
+                </div>
+            </div>
+
             <button onclick="sendWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white font-black py-3 rounded-xl shadow-lg flex items-center justify-center gap-3 transition transform active:scale-95">
                 ENVIAR PEDIDO POR WHATSAPP
             </button>
@@ -227,24 +252,29 @@
     <!-- Badge de Carrinho -->
     <button id="cart-badge" onclick="toggleCart()" class="fixed bottom-6 right-6 z-40 bg-blue-600 text-white p-4 rounded-full shadow-2xl no-print hover:scale-110 transition-transform flex items-center gap-3">
         <div class="relative">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
             <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">0</span>
         </div>
         <span class="font-black text-xs uppercase hidden md:inline">Meu Pedido</span>
     </button>
 
     <script>
+        // CONFIGURAÇÕES MELHOR ENVIO (Usuário deve preencher o token)
+        const ME_TOKEN = ""; // Insira seu Bearer Token aqui
+        const ORIGIN_CEP = "12940000"; // CEP de Atibaia
+
         const products = [
-            { id: 1, name: "Filtro 3 Tomadas ABS", master: 20, masterPrices: { c1: 22.90, c3: 26.90, c5: 34.90 }, unitPrices: { c1: 24.90, c3: 28.90, c5: 36.90 } },
-            { id: 2, name: "Filtro 4 Tomadas ABS", master: 20, masterPrices: { c1: 24.50, c3: 29.50, c5: 38.50 }, unitPrices: { c1: 26.50, c3: 31.50, c5: 40.50 } },
-            { id: 3, name: "Filtro 5 Tomadas ABS", master: 20, masterPrices: { c1: 25.90, c3: 29.90, c5: 38.90 }, unitPrices: { c1: 27.90, c3: 31.90, c5: 40.90 } },
-            { id: 4, name: "Filtro 6 Tomadas ABS", master: 16, masterPrices: { c1: 31.10, c3: 35.25, c5: 39.25 }, unitPrices: { c1: 33.10, c3: 37.25, c5: 41.25 } },
-            { id: 5, name: "Filtro 6 Tomadas Metal", master: 12, masterPrices: { c1: 43.00, c3: 47.00, c5: 51.00 }, unitPrices: { c1: 45.00, c3: 49.00, c5: 53.00 } },
-            { id: 6, name: "Filtro 8 Tomadas Metal", master: 10, masterPrices: { c1: 52.00, c3: 56.00, c5: 60.00 }, unitPrices: { c1: 54.00, c3: 58.00, c5: 62.00 } },
-            { id: 7, name: "Filtro 10 Tomadas Metal", master: 8, masterPrices: { c1: 59.00, c3: 64.00, c5: 68.00 }, unitPrices: { c1: 61.00, c3: 66.00, c5: 70.00 } }
+            { id: 1, name: "Filtro 3 Tomadas ABS", master: 20, weight: 200, masterPrices: { c1: 22.90, c3: 26.90, c5: 34.90 }, unitPrices: { c1: 24.90, c3: 28.90, c5: 36.90 }, dimensions: { c: 28, l: 12, a: 17.5 } },
+            { id: 2, name: "Filtro 4 Tomadas ABS", master: 20, weight: 220, masterPrices: { c1: 24.50, c3: 29.50, c5: 38.50 }, unitPrices: { c1: 26.50, c3: 31.50, c5: 40.50 }, dimensions: { c: 34, l: 12, a: 17.5 } },
+            { id: 3, name: "Filtro 5 Tomadas ABS", master: 20, weight: 250, masterPrices: { c1: 25.90, c3: 29.90, c5: 38.90 }, unitPrices: { c1: 27.90, c3: 31.90, c5: 40.90 }, dimensions: { c: 40, l: 12, a: 17.5 } },
+            { id: 4, name: "Filtro 6 Tomadas ABS", master: 16, weight: 280, masterPrices: { c1: 31.10, c3: 35.25, c5: 39.25 }, unitPrices: { c1: 33.10, c3: 37.25, c5: 41.25 }, dimensions: { c: 23, l: 24, a: 14 } },
+            { id: 5, name: "Filtro 6 Tomadas Metal", master: 12, weight: 400, masterPrices: { c1: 43.00, c3: 47.00, c5: 51.00 }, unitPrices: { c1: 45.00, c3: 49.00, c5: 53.00 }, dimensions: { c: 31.5, l: 13.5, a: 20 } },
+            { id: 6, name: "Filtro 8 Tomadas Metal", master: 10, weight: 480, masterPrices: { c1: 52.00, c3: 56.00, c5: 60.00 }, unitPrices: { c1: 54.00, c3: 58.00, c5: 62.00 }, dimensions: { c: 37.5, l: 9, a: 25 } },
+            { id: 7, name: "Filtro 10 Tomadas Metal", master: 8, weight: 560, masterPrices: { c1: 59.00, c3: 64.00, c5: 68.00 }, unitPrices: { c1: 61.00, c3: 66.00, c5: 70.00 }, dimensions: { c: 40.5, l: 9, a: 20 } }
         ];
 
         let cart = {};
+        let selectedFreight = { price: 0, name: "---" };
         let currentInstaCable = 'c1';
 
         function renderContent() {
@@ -257,7 +287,6 @@
                 const rowClass = idx % 2 === 0 ? 'bg-white' : 'bg-slate-50';
                 const accentColor = isMetal ? 'text-orange-700' : 'text-slate-900';
 
-                // Tabela Desktop
                 tableBody.innerHTML += `
                     <tr class="border-b border-slate-100 ${rowClass}">
                         <td class="p-4 border-r border-slate-100 font-black uppercase tracking-tighter ${accentColor}">${p.name}</td>
@@ -280,7 +309,6 @@
                     </tr>
                 `;
 
-                // Mobile
                 cardsContainer.innerHTML += `
                     <div class="bg-white rounded-xl border border-slate-200 p-4 border-l-4 ${isMetal ? 'border-l-orange-500' : 'border-l-slate-800'}">
                         <div class="flex justify-between mb-4 border-b pb-2">
@@ -291,7 +319,7 @@
                             ${[{l:'1,1m',k:'c1'},{l:'3,0m',k:'c3'},{l:'5,0m',k:'c5'}].map(c => `
                                 <div class="flex items-center justify-between">
                                     <div class="flex flex-col">
-                                        <span class="text-[9px] font-black text-slate-400 uppercase leading-none mb-1">${c.l}</span>
+                                        <span class="text-[9px] font-black text-slate-400 uppercase leading-none mb-1">CABO ${c.l}</span>
                                         <span class="text-[16px] font-black text-blue-700">R$ ${p.masterPrices[c.k].toFixed(2)}</span>
                                         <span class="text-[12px] font-bold text-slate-300 italic leading-none">R$ ${p.unitPrices[c.k].toFixed(2)}</span>
                                     </div>
@@ -301,7 +329,7 @@
                                             <input type="number" id="mqty-${p.id}-${c.k}" value="${cart[`${p.id}-${c.k}`] || 0}" class="w-10 text-center bg-transparent font-black text-sm">
                                             <button onclick="updateQty('${p.id}-${c.k}', 1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm text-blue-600">+</button>
                                         </div>
-                                        <button onclick="addBox('${p.id}-${c.k}')" class="text-[9px] font-black text-blue-700 bg-blue-50 px-3 py-1 rounded-lg border border-blue-100">+ ADICIONAR CAIXA</button>
+                                        <button onclick="addBox('${p.id}-${c.k}')" class="text-[9px] font-black text-blue-700 bg-blue-50 px-3 py-1 rounded-lg border border-blue-100">+ CAIXA</button>
                                     </div>
                                 </div>`).join('')}
                         </div>
@@ -313,16 +341,124 @@
             updatePostPreview();
         }
 
-        // Função para adicionar uma caixa master inteira de uma vez
+        async function calculateFreightAPI() {
+            const cepDest = document.getElementById('destination-cep').value.replace(/\D/g, '');
+            const btn = document.getElementById('btn-calc-freight');
+            const optionsDiv = document.getElementById('freight-options');
+
+            if (cepDest.length !== 8) {
+                alert("CEP Inválido");
+                return;
+            }
+
+            if (!ME_TOKEN) {
+                alert("Token do Melhor Envio não configurado. Por favor, insira seu token no código.");
+                return;
+            }
+
+            btn.innerHTML = '<span class="loader"></span>';
+            btn.disabled = true;
+
+            // Montagem dos pacotes para a API
+            let apiProducts = [];
+            let subtotalValue = 0;
+
+            Object.keys(cart).forEach(key => {
+                if (cart[key] > 0) {
+                    const [id, cable] = key.split('-');
+                    const p = products.find(prod => prod.id == id);
+                    const qty = cart[k] || cart[key];
+                    
+                    const numBoxes = Math.floor(qty / p.master);
+                    const remainingUnits = qty % p.master;
+                    const price = qty >= p.master ? p.masterPrices[cable] : p.unitPrices[cable];
+                    subtotalValue += price * qty;
+
+                    // Adiciona as Caixas Master completas como volumes individuais
+                    for(let i=0; i<numBoxes; i++) {
+                        apiProducts.push({
+                            id: `${id}-box-${i}`,
+                            width: p.dimensions.l,
+                            height: p.dimensions.a,
+                            length: p.dimensions.c,
+                            weight: (p.weight * p.master) / 1000,
+                            insurance_value: price * p.master,
+                            quantity: 1
+                        });
+                    }
+
+                    // Se sobrar avulsos, estima um volume menor ou peso simples
+                    if (remainingUnits > 0) {
+                        apiProducts.push({
+                            id: `${id}-units`,
+                            width: 15, height: 15, length: 20, // Volume estimado para avulsos
+                            weight: (p.weight * remainingUnits) / 1000,
+                            insurance_value: price * remainingUnits,
+                            quantity: 1
+                        });
+                    }
+                }
+            });
+
+            if (apiProducts.length === 0) {
+                alert("Adicione itens ao carrinho primeiro.");
+                btn.innerHTML = "CALCULAR";
+                btn.disabled = false;
+                return;
+            }
+
+            const payload = {
+                from: { postal_code: ORIGIN_CEP },
+                to: { postal_code: cepDest },
+                products: apiProducts
+            };
+
+            try {
+                const response = await fetch("https://www.melhorenvio.com.br/api/v2/me/shipment/calculate", {
+                    method: "POST",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${ME_TOKEN}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const results = await response.json();
+                
+                optionsDiv.innerHTML = '<p class="text-[8px] font-black text-slate-400 uppercase mb-2">Selecione uma opção:</p>';
+                optionsDiv.classList.remove('hidden');
+
+                results.forEach(service => {
+                    if (!service.error) {
+                        optionsDiv.innerHTML += `
+                            <button onclick="selectService('${service.name}', ${service.price})" class="w-full flex justify-between items-center bg-white border border-slate-200 p-2 rounded hover:border-blue-500 transition text-[10px] font-bold">
+                                <span>${service.name} (${service.delivery_range.min}-${service.delivery_range.max} dias)</span>
+                                <span class="text-blue-600 font-mono">R$ ${parseFloat(service.price).toFixed(2)}</span>
+                            </button>
+                        `;
+                    }
+                });
+
+            } catch (error) {
+                alert("Erro ao consultar a API. Verifique o console ou o token.");
+                console.error(error);
+            } finally {
+                btn.innerHTML = "CALCULAR";
+                btn.disabled = false;
+            }
+        }
+
+        function selectService(name, price) {
+            selectedFreight = { name, price: parseFloat(price) };
+            document.getElementById('selected-service-name').innerText = name;
+            updateCartSummary();
+        }
+
         function addBox(key) {
             const [id, cable] = key.split('-');
             const p = products.find(prod => prod.id == id);
-            const masterQty = p.master;
-            
-            // Adiciona a quantidade da caixa master ao que já existe
-            updateQty(key, masterQty);
-            
-            // Feedback visual no botão do carrinho
+            updateQty(key, p.master);
             const badge = document.getElementById('cart-badge');
             badge.classList.add('cart-active');
             setTimeout(() => badge.classList.remove('cart-active'), 500);
@@ -337,14 +473,55 @@
             updateCartSummary();
         }
 
+        function updateCartSummary() {
+            const list = document.getElementById('cart-items');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const freightEl = document.getElementById('cart-freight');
+            const totalEl = document.getElementById('cart-total');
+            const countEl = document.getElementById('cart-count');
+
+            list.innerHTML = "";
+            let subtotal = 0;
+            let totalItems = 0;
+
+            Object.keys(cart).forEach(k => {
+                if(cart[k] > 0) {
+                    const [id, cable] = k.split('-');
+                    const p = products.find(prod => prod.id == id);
+                    const qty = cart[k];
+                    const price = qty >= p.master ? p.masterPrices[cable] : p.unitPrices[cable];
+                    
+                    subtotal += price * qty;
+                    totalItems += qty;
+
+                    const label = cable.replace('c1','1.1m').replace('c3','3m').replace('c5','5m');
+                    list.innerHTML += `
+                        <div class="flex justify-between items-center border-b border-slate-50 pb-1">
+                            <div class="flex flex-col">
+                                <span class="font-black text-slate-800">${p.name} (${label})</span>
+                                <span class="text-[8px] text-blue-600 font-bold uppercase">${qty >= p.master ? 'Preço Atacado' : 'Preço Unitário'}</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-black text-slate-400 mr-2">${qty}x</span>
+                                <span class="font-black text-slate-900">R$ ${(price*qty).toFixed(2)}</span>
+                            </div>
+                        </div>`;
+                }
+            });
+
+            subtotalEl.innerText = `R$ ${subtotal.toFixed(2)}`;
+            freightEl.innerText = `R$ ${selectedFreight.price.toFixed(2)}`;
+            totalEl.innerText = `R$ ${(subtotal + selectedFreight.price).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+            countEl.innerText = totalItems;
+        }
+
         function toggleCart() {
             const d = document.getElementById('cart-drawer');
             d.style.transform = d.style.transform === 'translateY(0%)' ? 'translateY(100%)' : 'translateY(0%)';
         }
 
         function toggleInstagramMode() {
-            const m = document.getElementById('instagram-modal');
-            m.classList.toggle('hidden');
+            document.getElementById('instagram-modal').classList.toggle('hidden');
         }
 
         function setInstaCable(c) {
@@ -361,41 +538,18 @@
             document.getElementById('insta-price').innerText = `R$ ${p.masterPrices[currentInstaCable].toFixed(2)}`;
         }
 
-        function updateCartSummary() {
-            const list = document.getElementById('cart-items');
-            const count = document.getElementById('cart-count');
-            list.innerHTML = "";
-            let total = 0;
-            let items = 0;
-            Object.keys(cart).forEach(k => {
-                if(cart[k] > 0) {
-                    const [id, cable] = k.split('-');
-                    const p = products.find(prod => prod.id == id);
-                    const qty = cart[k];
-                    const price = qty >= p.master ? p.masterPrices[cable] : p.unitPrices[cable];
-                    total += price * qty;
-                    items += qty;
-                    list.innerHTML += `
-                        <div class="flex justify-between items-center border-b border-slate-50 pb-1">
-                            <div class="flex flex-col">
-                                <span class="font-black text-slate-800">${p.name} (${cable.replace('c1','1.1m').replace('c3','3m').replace('c5','5m')})</span>
-                                <span class="text-[8px] text-blue-600 font-bold uppercase">${qty >= p.master ? 'Preço Atacado' : 'Preço Unitário'}</span>
-                            </div>
-                            <div class="text-right">
-                                <span class="font-black text-slate-400 mr-2">${qty}x</span>
-                                <span class="font-black text-slate-900">R$ ${(price*qty).toFixed(2)}</span>
-                            </div>
-                        </div>`;
-                }
-            });
-            count.innerText = items;
-            document.getElementById('cart-total').innerText = `R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-        }
-
         function sendWhatsApp() {
             const phone = "5511954941312";
-            let msg = "*SOLICITAÇÃO DE ORÇAMENTO - FÁBRICA*\n\n";
-            let total = 0;
+            const cep = document.getElementById('destination-cep').value;
+            
+            if (!cep) {
+                alert("Informe o CEP de destino.");
+                return;
+            }
+
+            let msg = `*SOLICITAÇÃO DE PEDIDO - FÁBRICA*\n📍 *CEP:* ${cep}\n🚚 *Frete (${selectedFreight.name}):* R$ ${selectedFreight.price.toFixed(2)}\n\n`;
+            let subtotal = 0;
+
             Object.keys(cart).forEach(k => {
                 if(cart[k] > 0) {
                     const [id, cable] = k.split('-');
@@ -403,11 +557,12 @@
                     const qty = cart[k];
                     const label = cable.replace('c1','1.1m').replace('c3','3m').replace('c5','5m');
                     const price = qty >= p.master ? p.masterPrices[cable] : p.unitPrices[cable];
-                    total += price * qty;
-                    msg += `📦 *${p.name}*\n📏 Cabo: ${label}\n🔢 Qtd: ${qty} un (${qty >= p.master ? 'Atacado' : 'Avulso'})\n💰 Subtotal: R$ ${(price*qty).toFixed(2)}\n\n`;
+                    subtotal += price * qty;
+                    msg += `📦 *${p.name}*\n📏 Cabo: ${label}\n🔢 Qtd: ${qty} un (${qty >= p.master ? 'Atacado' : 'Avulso'})\n💰 R$ ${(price*qty).toFixed(2)}\n\n`;
                 }
             });
-            msg += `--------------------------\n⚡ *TOTAL ESTIMADO: R$ ${total.toFixed(2)}*`;
+
+            msg += `--------------------------\n⚡ *TOTAL ESTIMADO: R$ ${(subtotal + selectedFreight.price).toFixed(2)}*\n\n_Sujeito a conferência de estoque._`;
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
         }
 
