@@ -30,7 +30,7 @@
             100% { transform: scale(1); }
         }
 
-        /* Classes de controle de exibição */
+        /* Controle de exibição por perfil */
         body.mode-consumidor .wholesale-only { display: none !important; }
         body.mode-consumidor .desktop-table-container { display: none !important; }
         body.mode-revendedor .desktop-cards-container { display: none !important; }
@@ -49,7 +49,7 @@
                 <img src="image_6acbb3.png" alt="Logo" class="max-h-full">
             </div>
             <h1 class="text-white text-3xl font-black uppercase italic mb-2 tracking-tighter">Bem-vindo à Fábrica</h1>
-            <p class="text-slate-400 text-sm mb-8 font-medium">Selecione seu perfil de acesso:</p>
+            <p class="text-slate-400 text-sm mb-8 font-medium">Selecione o seu perfil de acesso:</p>
             
             <div class="grid grid-cols-1 gap-4">
                 <button onclick="setUserMode('consumidor')" class="bg-white hover:bg-slate-100 text-slate-900 p-6 rounded-2xl transition shadow-xl flex flex-col items-center gap-2 group">
@@ -57,7 +57,7 @@
                     <span class="text-xs text-slate-500 font-medium tracking-tight">Vitrine exclusiva e pagamento direto via PIX</span>
                 </button>
                 
-                <button onclick="setUserMode('revendedor')" class="bg-blue-600 hover:bg-blue-700 text-white p-6 rounded-2xl transition shadow-xl flex flex-col items-center gap-2 group border-b-4 border-blue-800">
+                <button onclick="setUserMode('revendedor')" class="bg-blue-600 hover:bg-blue-700 text-white p-6 rounded-2xl transition shadow-xl flex flex-col items-center gap-2 group border-b-4 border-blue-800 text-white">
                     <span class="font-black text-xl uppercase tracking-tighter italic text-white">Revendedor / Lojista</span>
                     <span class="text-blue-200 text-xs font-medium tracking-tight text-white">Tabela de Atacado para compras em lote</span>
                 </button>
@@ -67,7 +67,7 @@
 
     <!-- Cabeçalho -->
     <header class="bg-slate-900 text-white shadow-lg md:mt-6">
-        <div class="max-w-7xl mx-auto px-4 md:px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-6 text-white">
             <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6">
                 <div class="bg-white p-2 rounded-xl shadow-inner w-20 h-20 flex items-center justify-center overflow-hidden border-2 border-white cursor-pointer" onclick="location.reload()">
                     <img src="image_6acbb3.png" alt="Logo" class="max-w-full max-h-full object-contain">
@@ -80,7 +80,7 @@
             
             <div class="flex flex-wrap justify-center gap-3 no-print">
                 <button onclick="exportToPDF()" class="wholesale-only flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition shadow-lg text-white">
-                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     EXPORTAR PDF
                 </button>
             </div>
@@ -154,7 +154,7 @@
                     <p>• Fusível reserva incluso em todos os modelos.</p>
                     <p class="wholesale-only font-black text-blue-700 uppercase">→ Desconto aplicado na Caixa Master.</p>
                     <p>• Cabos 0,75mm² certificados Inmetro.</p>
-                    <p class="font-bold text-slate-900 uppercase tracking-tighter">→ Pagamento Facilitado via PIX.</p>
+                    <p class="font-bold text-slate-900 uppercase tracking-tighter text-slate-900">→ Pagamento Facilitado via PIX.</p>
                 </div>
             </div>
             <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
@@ -199,8 +199,12 @@
             <div id="cart-items" class="max-h-32 overflow-y-auto mb-4 space-y-2 text-[10px]"></div>
 
             <div class="space-y-1 mb-4 px-2 border-t pt-2 text-slate-900 font-bold">
-                <div class="flex justify-between text-[10px] text-slate-400"><span>FRETE:</span> <span id="cart-freight-val">R$ 0,00</span></div>
-                <div class="flex justify-between text-[10px]"><span>TOTAL:</span> <span id="cart-total" class="text-blue-700 text-lg italic font-mono font-black">R$ 0,00</span></div>
+                <div class="flex justify-between text-[10px] text-slate-400 font-black">
+                    <span>FRETE:</span> <span id="cart-freight-val">R$ 0,00</span>
+                </div>
+                <div class="flex justify-between text-[10px]">
+                    <span>TOTAL:</span> <span id="cart-total" class="text-blue-700 text-lg italic font-mono font-black">R$ 0,00</span>
+                </div>
             </div>
 
             <div class="grid grid-cols-1 gap-2">
@@ -216,7 +220,8 @@
             <h2 class="font-black text-slate-900 uppercase text-lg mb-2 italic text-slate-900">Pagamento PIX</h2>
             <p class="text-[10px] text-slate-500 font-bold uppercase mb-4 tracking-tighter">ELETRIZEI LTDA • 43.194.137/0001-03</p>
             <div id="qrcode" class="mb-4"></div>
-            <div class="bg-slate-100 p-3 rounded-xl mb-4 border border-slate-200">
+            <div class="bg-slate-100 p-3 rounded-xl mb-4 border border-slate-200 text-slate-900">
+                <p class="text-[10px] text-slate-400 font-black uppercase">Valor a Pagar:</p>
                 <p id="pix-value-display" class="text-2xl font-black text-blue-700 italic">R$ 0,00</p>
             </div>
             <button onclick="copyPixCode()" class="w-full bg-slate-900 text-white font-black py-3 rounded-xl mb-3 text-xs text-white">COPIAR CÓDIGO</button>
@@ -225,9 +230,9 @@
     </div>
 
     <!-- Badge Carrinho -->
-    <button id="cart-badge" onclick="toggleCart()" class="fixed bottom-6 right-6 z-40 bg-blue-600 text-white p-4 rounded-full shadow-2xl flex items-center gap-3 border-2 border-blue-400">
+    <button id="cart-badge" onclick="toggleCart()" class="fixed bottom-6 right-6 z-40 bg-blue-600 text-white p-4 rounded-full shadow-2xl flex items-center gap-3 border-2 border-blue-400 text-white">
         <span id="cart-count" class="bg-red-600 text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border-2 border-white text-white">0</span>
-        <span class="font-black text-xs uppercase hidden md:inline text-white">Meu Pedido</span>
+        <span class="font-black text-xs uppercase hidden md:inline">Meu Pedido</span>
     </button>
 
     <script>
@@ -300,12 +305,12 @@
                                 <span class="wholesale-only block text-blue-700 font-bold">R$ ${p.masterPrices[c].toFixed(2)}</span>
                                 <span class="block text-slate-400 text-[10px] italic">R$ ${p.unitPrices[c].toFixed(2)}</span>
                                 <div class="flex items-center justify-center mt-2 no-print">
-                                    <button onclick="updateQty('${p.id}-${c}', -1)" class="w-6 h-6 bg-slate-100 rounded">-</button>
-                                    <input type="number" id="qty-${p.id}-${c}" value="${cart[`${p.id}-${c}`] || 0}" class="w-8 text-center text-[10px]" readonly>
-                                    <button onclick="updateQty('${p.id}-${c}', 1)" class="w-6 h-6 bg-slate-100 rounded">+</button>
+                                    <button onclick="updateQty('${p.id}-${c}', -1)" class="w-6 h-6 bg-slate-100 rounded text-slate-400">-</button>
+                                    <input type="number" id="qty-${p.id}-${c}" value="${cart[`${p.id}-${c}`] || 0}" class="w-8 text-center text-[10px] bg-transparent" readonly>
+                                    <button onclick="updateQty('${p.id}-${c}', 1)" class="w-6 h-6 bg-slate-100 rounded text-blue-600">+</button>
                                 </div>
                             </td>`).join('')}
-                        <td class="wholesale-only p-4 text-center font-black bg-blue-50">${p.master} un</td>
+                        <td class="wholesale-only p-4 text-center font-black bg-blue-50 text-blue-900">${p.master} un</td>
                     </tr>`;
 
                 desktopCardsContainer.innerHTML += `
@@ -315,7 +320,7 @@
                         </div>
                         <div class="flex-grow p-6 flex flex-col justify-between">
                             <div><h3 class="font-black text-lg uppercase ${accentColor} leading-tight mb-4">${p.name}</h3></div>
-                            <div class="grid grid-cols-3 gap-2">
+                            <div class="grid grid-cols-3 gap-2 text-slate-900">
                                 ${['c1','c3','c5'].map(k => `
                                     <div class="flex flex-col">
                                         <span class="text-[7px] font-black text-slate-400 uppercase">${k.replace('c1','1.1m').replace('c3','3m')}</span>
@@ -329,7 +334,7 @@
                             </div>
                             <div class="pt-3 border-t mt-4 flex justify-between items-end">
                                 <div class="flex flex-col gap-1"><span class="text-[7px] font-black text-green-600">IDEAL PARA:</span>${svgIcons.recommended}</div>
-                                <span class="text-[8px] font-black bg-blue-50 p-1 rounded">${isMetal ? '1200W' : '900W'}</span>
+                                <span class="text-[8px] font-black bg-blue-50 p-1 rounded text-blue-700">${isMetal ? '1200W' : '900W'}</span>
                             </div>
                         </div>
                     </div>`;
@@ -344,12 +349,12 @@
                             ${['c1','c3','c5'].map(k => `
                                 <div class="flex justify-between items-center">
                                     <span class="text-[9px] font-black text-slate-400 uppercase">Cabo ${k.replace('c1','1.1m').replace('c3','3m')}</span>
-                                    <div class="flex items-center gap-4">
+                                    <div class="flex items-center gap-4 text-slate-900">
                                         <span class="font-black">R$ ${p.unitPrices[k].toFixed(2)}</span>
                                         <div class="flex items-center bg-slate-100 rounded-lg p-1">
-                                            <button onclick="updateQty('${p.id}-${k}', -1)" class="w-6 h-6">-</button>
+                                            <button onclick="updateQty('${p.id}-${k}', -1)" class="w-6 h-6 text-slate-400">-</button>
                                             <input type="number" id="mqty-${p.id}-${k}" value="${cart[`${p.id}-${k}`] || 0}" class="w-8 text-center bg-transparent" readonly>
-                                            <button onclick="updateQty('${p.id}-${k}', 1)" class="w-6 h-6">+</button>
+                                            <button onclick="updateQty('${p.id}-${k}', 1)" class="w-6 h-6 text-blue-600">+</button>
                                         </div>
                                     </div>
                                 </div>`).join('')}
@@ -407,8 +412,9 @@
 
         function generatePixPayload(amount) {
             const val = amount.toFixed(2);
-            const merchantInfo = "0014" + PIX_KEY;
-            const merchantSection = "26" + (14 + merchantInfo.length).toString().padStart(2, '0') + "0014br.gov.bcb.pix" + merchantInfo;
+            // Formatação seguindo o padrão EMV/BCB rigorosamente
+            const merchantInfo = "0014br.gov.bcb.pix0114" + PIX_KEY;
+            const merchantSection = "26" + merchantInfo.length.toString().padStart(2, '0') + merchantInfo;
             
             let payload = [
                 "000201",
@@ -427,7 +433,10 @@
         }
 
         function showPixModal() {
-            if(currentTotal <= 0) return;
+            if(currentTotal <= 0) { alert("O seu carrinho está vazio!"); return; }
+            const state = document.getElementById('state-selector').value;
+            if(!state) { alert("Selecione o estado para incluir o frete antes de pagar!"); return; }
+
             document.getElementById('pix-modal').classList.remove('hidden');
             document.getElementById('pix-value-display').innerText = `R$ ${currentTotal.toFixed(2)}`;
             lastPixPayload = generatePixPayload(currentTotal);
@@ -443,15 +452,32 @@
 
         function processOrder(isPix = false) {
             const state = document.getElementById('state-selector').value;
-            let msg = `*PEDIDO (${userMode.toUpperCase()})*\n📍 Destino: ${state}\n`;
+            if(!state) { alert("Selecione o estado!"); return; }
+            let msg = `*SOLICITAÇÃO DE PEDIDO (${userMode.toUpperCase()})*\n📍 Destino: ${state}\n`;
             if(isPix) msg += `✅ PAGAMENTO VIA PIX REALIZADO\n`;
+            
+            Object.keys(cart).forEach(k => {
+                if(cart[k] > 0) {
+                    const [id, cable] = k.split('-'); const p = products.find(prod => prod.id == id);
+                    const price = (userMode === 'revendedor' && cart[k] >= p.master) ? p.masterPrices[cable] : p.unitPrices[cable];
+                    msg += `📦 ${p.name} (${cable.replace('c1','1.1m')}) | ${cart[k]}x | R$ ${(price*cart[k]).toFixed(2)}\n`;
+                }
+            });
             msg += `\n💰 TOTAL: R$ ${currentTotal.toFixed(2)}\n\nEnvie o comprovante abaixo:`;
             window.open(`https://wa.me/5511954941312?text=${encodeURIComponent(msg)}`);
         }
 
         function closePixAndOrder() { document.getElementById('pix-modal').classList.add('hidden'); processOrder(true); }
-        function toggleCart() { document.getElementById('cart-drawer').classList.toggle('translate-x-full'); }
+        
+        function toggleCart() { 
+            const d = document.getElementById('cart-drawer');
+            // Correção da abertura (Eixo Y conforme definido nas classes do elemento)
+            d.classList.toggle('translate-y-full');
+            d.classList.toggle('translate-y-0');
+        }
+        
         function exportToPDF() { window.print(); }
+        window.onload = () => {};
     </script>
 </body>
 </html>
