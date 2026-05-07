@@ -37,7 +37,7 @@
         body.mode-revendedor .consumidor-video-section { display: none !important; }
         body.mode-revendedor .pix-section { display: none !important; }
 
-        #qrcode img { margin: 0 auto; border: 8px solid white; border-radius: 8px; }
+        #qrcode img { margin: 0 auto; border: 8px solid white; border-radius: 16px; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 pb-24 md:pb-12">
@@ -48,18 +48,18 @@
             <div class="bg-white p-2 rounded-2xl w-24 h-24 mx-auto mb-6 shadow-2xl flex items-center justify-center border-2 border-blue-500">
                 <img src="image_6acbb3.png" alt="Logo" class="max-h-full">
             </div>
-            <h1 class="text-white text-3xl font-black uppercase italic mb-2 tracking-tighter">Bem-vindo à Fábrica</h1>
+            <h1 class="text-white text-3xl font-black uppercase italic mb-2 tracking-tighter">ELETRIZEI LTDA</h1>
             <p class="text-slate-400 text-sm mb-8 font-medium">Selecione o seu perfil de acesso:</p>
             
             <div class="grid grid-cols-1 gap-4">
                 <button onclick="setUserMode('consumidor')" class="bg-white hover:bg-slate-100 text-slate-900 p-6 rounded-2xl transition shadow-xl flex flex-col items-center gap-2 group">
-                    <span class="font-black text-xl uppercase tracking-tighter text-slate-900">Consumidor Final</span>
+                    <span class="font-black text-xl uppercase tracking-tighter">Consumidor Final</span>
                     <span class="text-xs text-slate-500 font-medium tracking-tight">Vitrine exclusiva e pagamento direto via PIX</span>
                 </button>
                 
-                <button onclick="setUserMode('revendedor')" class="bg-blue-600 hover:bg-blue-700 text-white p-6 rounded-2xl transition shadow-xl flex flex-col items-center gap-2 group border-b-4 border-blue-800 text-white">
-                    <span class="font-black text-xl uppercase tracking-tighter italic text-white">Revendedor / Lojista</span>
-                    <span class="text-blue-200 text-xs font-medium tracking-tight text-white">Tabela de Atacado para compras em lote</span>
+                <button onclick="setUserMode('revendedor')" class="bg-blue-600 hover:bg-blue-700 text-white p-6 rounded-2xl transition shadow-xl flex flex-col items-center gap-2 group border-b-4 border-blue-800">
+                    <span class="font-black text-xl uppercase tracking-tighter italic">Revendedor / Lojista</span>
+                    <span class="text-blue-100 text-xs font-medium tracking-tight">Tabela de Atacado para compras em lote</span>
                 </button>
             </div>
         </div>
@@ -67,19 +67,19 @@
 
     <!-- Cabeçalho -->
     <header class="bg-slate-900 text-white shadow-lg md:mt-6">
-        <div class="max-w-7xl mx-auto px-4 md:px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-6 text-white">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6">
                 <div class="bg-white p-2 rounded-xl shadow-inner w-20 h-20 flex items-center justify-center overflow-hidden border-2 border-white cursor-pointer" onclick="location.reload()">
                     <img src="image_6acbb3.png" alt="Logo" class="max-w-full max-h-full object-contain">
                 </div>
-                <div class="text-center md:text-left text-white">
+                <div class="text-center md:text-left">
                     <h1 class="text-2xl font-black tracking-tight uppercase italic mb-0 text-white leading-none">ELETRIZEI LTDA</h1>
                     <p id="header-subtitle" class="text-blue-400 font-medium tracking-[0.2em] text-[10px] uppercase mt-1">Catálogo Digital • 2026</p>
                 </div>
             </div>
             
             <div class="flex flex-wrap justify-center gap-3 no-print">
-                <button onclick="exportToPDF()" class="wholesale-only flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition shadow-lg text-white">
+                <button onclick="exportToPDF()" class="wholesale-only flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition shadow-lg">
                     <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     EXPORTAR PDF
                 </button>
@@ -88,27 +88,30 @@
     </header>
 
     <main id="main-catalog" class="max-w-7xl mx-auto px-4 md:px-6 -mt-4">
+        <!-- Banner Condições -->
         <div class="bg-blue-600 text-white rounded-xl p-3 shadow-xl flex flex-col md:flex-row items-center justify-center gap-4 mb-8 text-center border-b-4 border-blue-800">
             <div class="flex items-center gap-2 text-white">
                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                <p id="user-banner-text" class="text-[10px] font-black uppercase tracking-wide text-white font-bold">Acesso Permitido</p>
+                <p id="user-banner-text" class="text-[10px] font-black uppercase tracking-wide">Acesso Permitido</p>
             </div>
             <div class="flex items-center gap-2 text-yellow-200">
                 <svg class="w-4 h-4 text-yellow-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-                <p class="text-[10px] font-black uppercase tracking-tight text-white tracking-widest italic">Equipamento Bivolt (110v/220v)</p>
+                <p class="text-[10px] font-black uppercase tracking-tight tracking-widest italic">Equipamento Bivolt (110v/220v)</p>
             </div>
         </div>
 
+        <!-- Seção de Vídeo (Somente Consumidor) -->
         <section class="consumidor-video-section mb-10 flex flex-col items-center">
-            <h3 class="font-black text-slate-900 uppercase text-xs mb-4 tracking-widest flex items-center gap-2">
+            <h3 class="font-black text-slate-900 uppercase text-[10px] mb-4 tracking-widest flex items-center gap-2">
                 <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l6.393 4-6.393 4z"/></svg>
-                Veja o produto em funcionamento
+                VEJA O PRODUTO EM FUNCIONAMENTO
             </h3>
             <div class="w-full max-w-[320px] aspect-[9/16] bg-slate-900 rounded-[2.8rem] p-3 shadow-2xl border-[6px] border-slate-800 relative overflow-hidden flex items-center justify-center">
                 <iframe class="w-full h-full rounded-[2.2rem]" src="https://www.youtube.com/embed/KcZIRztMO8E?autoplay=0&rel=0&modestbranding=1" frameborder="0" allowfullscreen></iframe>
             </div>
         </section>
 
+        <!-- Produtos -->
         <section class="mb-10">
             <div class="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
                 <h2 class="text-lg font-black text-slate-900 flex items-center gap-2 uppercase tracking-tight">
@@ -125,8 +128,8 @@
             <div id="desktop-cards-container" class="desktop-cards-container hidden md:grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
 
             <div class="desktop-table-container hidden md:block bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-[11px] table-fixed border-collapse text-slate-700">
+                <div class="overflow-x-auto text-slate-900">
+                    <table class="w-full text-left text-[11px] table-fixed border-collapse">
                         <thead>
                             <tr class="bg-slate-900 text-white font-bold uppercase tracking-widest text-white">
                                 <th class="p-4 w-[80px]"></th>
@@ -143,31 +146,32 @@
             </div>
         </section>
 
-        <footer class="mt-8 bg-white border border-slate-200 rounded-2xl p-6 flex flex-col lg:flex-row justify-between items-center gap-8 shadow-sm">
+        <!-- Rodapé -->
+        <footer class="mt-8 bg-white border border-slate-200 rounded-2xl p-6 flex flex-col lg:flex-row justify-between items-center gap-8 shadow-sm text-slate-900">
             <div class="flex-1 text-[10px] text-slate-600 font-medium">
                 <h4 class="font-black text-slate-900 uppercase mb-3 text-xs tracking-widest text-slate-400">Informações Gerais</h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-1.5 text-slate-900">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-1.5 font-bold">
                     <p>• Fusível reserva incluso em todos os modelos.</p>
                     <p class="wholesale-only font-black text-blue-700 uppercase">→ Desconto aplicado na Caixa Master.</p>
                     <p>• Cabos 0,75mm² certificados Inmetro.</p>
                     <p class="font-bold text-slate-900 uppercase tracking-tighter">→ Pagamento Facilitado via PIX.</p>
                 </div>
             </div>
-            <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto text-white">
+            <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
                 <a href="https://instagram.com/filtrodelinhabr" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-white px-6 py-4 rounded-xl shadow-lg border-b-4 border-slate-600 text-center flex-1 min-w-[180px] transition group no-print">
                     <p class="text-[8px] font-black text-slate-400 uppercase mb-1 tracking-widest group-hover:text-blue-400 transition">Instagram</p>
                     <span class="text-lg font-black block tracking-tighter italic text-blue-400">@filtrodelinhabr</span>
                 </a>
                 <div class="bg-slate-900 text-white px-6 py-4 rounded-xl shadow-lg border-b-4 border-blue-600 text-center min-w-[180px]">
-                    <p class="text-[8px] font-black text-blue-400 uppercase mb-1 tracking-widest">WhatsApp</p>
-                    <span class="text-lg font-black block tracking-tighter italic">11 95494-1312</span>
+                    <p class="text-[8px] font-black text-blue-400 uppercase mb-1 tracking-widest text-white">WhatsApp</p>
+                    <span class="text-lg font-black block tracking-tighter italic text-white">11 95494-1312</span>
                 </div>
             </div>
         </footer>
     </main>
 
     <!-- Carrinho -->
-    <div id="cart-drawer" class="fixed bottom-0 left-0 right-0 z-50 no-print transition-transform transform translate-y-full">
+    <div id="cart-drawer" class="fixed bottom-0 left-0 right-0 z-50 no-print transition-transform duration-300 transform translate-y-full">
         <div class="bg-white border-t border-slate-200 shadow-2xl p-4 md:max-w-md md:mx-auto md:mb-4 md:rounded-2xl md:border">
             <div class="flex items-center justify-between mb-3 border-b pb-2">
                 <h3 class="font-black text-slate-900 uppercase text-xs flex items-center gap-2">
@@ -178,7 +182,7 @@
             </div>
             
             <select id="state-selector" onchange="updateCartSummary()" class="w-full bg-white border border-slate-200 p-2 rounded text-xs font-bold text-slate-900 mb-4">
-                <option value="">Estado para Entrega...</option>
+                <option value="">Selecione o Estado para Entrega...</option>
                 <optgroup label="SUL / SUDESTE">
                     <option value="SP">São Paulo</option><option value="RJ">Rio de Janeiro</option>
                     <option value="MG">Minas Gerais</option><option value="ES">Espírito Santo</option>
@@ -205,34 +209,34 @@
 
             <div class="grid grid-cols-1 gap-2">
                 <button onclick="showPixModal()" class="pix-section bg-blue-600 hover:bg-blue-700 text-white font-black py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 text-xs uppercase tracking-widest">Pagar via PIX</button>
-                <button onclick="processOrder()" class="bg-green-600 hover:bg-green-700 text-white font-black py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 text-xs uppercase tracking-widest">Falar no WhatsApp</button>
+                <button onclick="processOrder()" class="bg-green-600 hover:bg-green-700 text-white font-black py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 text-xs uppercase tracking-widest text-white">Falar no WhatsApp</button>
             </div>
         </div>
     </div>
 
     <!-- MODAL PIX -->
-    <div id="pix-modal" class="hidden fixed inset-0 z-[250] bg-slate-900/95 flex items-center justify-center p-4 text-slate-900 font-bold">
+    <div id="pix-modal" class="hidden fixed inset-0 z-[250] bg-slate-900/95 flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl p-6 max-w-sm w-full text-center shadow-2xl border-4 border-blue-500">
-            <h2 class="font-black uppercase text-lg mb-2 italic">Pagamento PIX</h2>
+            <h2 class="font-black text-slate-900 uppercase text-lg mb-2 italic">Pagamento PIX</h2>
             <p class="text-[10px] text-slate-500 font-bold uppercase mb-4 tracking-tighter">ELETRIZEI LTDA • 43.194.137/0001-37</p>
             <div id="qrcode" class="mb-4"></div>
-            <div class="bg-slate-100 p-3 rounded-xl mb-4 border border-slate-200">
+            <div class="bg-slate-100 p-3 rounded-xl mb-4 border border-slate-200 text-slate-900">
                 <p class="text-[10px] text-slate-400 font-black uppercase">Valor a Pagar:</p>
                 <p id="pix-value-display" class="text-2xl font-black text-blue-700 italic">R$ 0,00</p>
             </div>
-            <button onclick="copyPixCode()" class="w-full bg-slate-900 text-white font-black py-3 rounded-xl mb-3 text-xs">COPIAR CÓDIGO</button>
-            <button onclick="closePixAndOrder()" class="w-full bg-green-600 text-white font-black py-3 rounded-xl text-xs uppercase">ENVIAR COMPROVANTE</button>
+            <button onclick="copyPixCode()" class="w-full bg-slate-900 text-white font-black py-3 rounded-xl mb-3 text-xs text-white">COPIAR CÓDIGO</button>
+            <button onclick="closePixAndOrder()" class="w-full bg-green-600 text-white font-black py-3 rounded-xl text-xs uppercase text-white">ENVIAR COMPROVANTE</button>
         </div>
     </div>
 
     <!-- Badge Carrinho -->
-    <button id="cart-badge" onclick="toggleCart()" class="fixed bottom-6 right-6 z-40 bg-blue-600 text-white p-4 rounded-full shadow-2xl flex items-center gap-3 border-2 border-blue-400">
+    <button id="cart-badge" onclick="toggleCart()" class="fixed bottom-6 right-6 z-40 bg-blue-600 text-white p-4 rounded-full shadow-2xl flex items-center gap-3 border-2 border-blue-400 text-white">
         <span id="cart-count" class="bg-red-600 text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border-2 border-white text-white">0</span>
         <span class="font-black text-xs uppercase hidden md:inline">Meu Pedido</span>
     </button>
 
     <script>
-        const PIX_KEY = "43194137000137"; // Usando o CNPJ do código funcional enviado
+        const PIX_KEY = "43194137000137";
         const PIX_NAME = "ELETRIZEI LTDA";
         const PIX_CITY = "SAO PAULO";
 
@@ -259,8 +263,7 @@
         };
 
         const svgIcons = {
-            recommended: `<div class="flex gap-2.5 opacity-80 grayscale"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="13" rx="2"/><path d="M7 21h10"/></svg></div>`,
-            pin: () => `<svg class="w-4 h-4 text-slate-300" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="6" width="16" height="12" rx="2" fill="#f1f5f9"/><circle cx="8" cy="12" r="1.5"/><circle cx="16" cy="12" r="1.5"/></svg>`
+            recommended: `<div class="flex gap-2.5 opacity-80 grayscale"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="13" rx="2"/><path d="M7 21h10"/></svg></div>`
         };
 
         function calculateFreight(totalUnits, hasMetal, state) {
@@ -315,21 +318,21 @@
                             <img src="${p.img}" class="max-h-full object-contain" onerror="this.src='https://via.placeholder.com/200'">
                         </div>
                         <div class="flex-grow p-6 flex flex-col justify-between">
-                            <div><h3 class="font-black text-lg uppercase ${accentColor} leading-tight mb-4">${p.name}</h3></div>
-                            <div class="grid grid-cols-3 gap-2">
+                            <div><h3 class="font-black text-lg uppercase ${accentColor} leading-tight mb-4 text-slate-900">${p.name}</h3></div>
+                            <div class="grid grid-cols-3 gap-2 text-slate-900">
                                 ${['c1','c3','c5'].map(k => `
                                     <div class="flex flex-col">
                                         <span class="text-[7px] font-black text-slate-400 uppercase">${k.replace('c1','1.1m').replace('c3','3m')}</span>
-                                        <span class="text-sm font-black">R$ ${p.unitPrices[k].toFixed(2)}</span>
+                                        <span class="text-sm font-black text-slate-900">R$ ${p.unitPrices[k].toFixed(2)}</span>
                                         <div class="flex items-center mt-2 bg-slate-50 rounded w-fit">
                                             <button onclick="updateQty('${p.id}-${k}', -1)" class="px-1 text-slate-400">-</button>
-                                            <input type="number" id="dqty-${p.id}-${k}" value="${cart[`${p.id}-${k}`] || 0}" class="w-6 text-center text-[8px] bg-transparent" readonly>
+                                            <input type="number" id="dqty-${p.id}-${k}" value="${cart[`${p.id}-${k}`] || 0}" class="w-6 text-center text-[8px] bg-transparent font-black" readonly>
                                             <button onclick="updateQty('${p.id}-${k}', 1)" class="px-1 text-blue-600">+</button>
                                         </div>
                                     </div>`).join('')}
                             </div>
                             <div class="pt-3 border-t mt-4 flex justify-between items-end">
-                                <div class="flex flex-col gap-1"><span class="text-[7px] font-black text-green-600">IDEAL PARA:</span>${svgIcons.recommended}</div>
+                                <div class="flex flex-col gap-1"><span class="text-[7px] font-black text-green-600 uppercase tracking-tighter">IDEAL PARA:</span>${svgIcons.recommended}</div>
                                 <span class="text-[8px] font-black bg-blue-50 p-1 rounded text-blue-700">${isMetal ? '1200W' : '900W'}</span>
                             </div>
                         </div>
@@ -343,13 +346,13 @@
                         </div>
                         <div class="space-y-4">
                             ${['c1','c3','c5'].map(k => `
-                                <div class="flex justify-between items-center">
+                                <div class="flex justify-between items-center text-slate-900">
                                     <span class="text-[9px] font-black text-slate-400 uppercase">Cabo ${k.replace('c1','1.1m').replace('c3','3m')}</span>
-                                    <div class="flex items-center gap-4 text-slate-900">
+                                    <div class="flex items-center gap-4">
                                         <span class="font-black">R$ ${p.unitPrices[k].toFixed(2)}</span>
                                         <div class="flex items-center bg-slate-100 rounded-lg p-1">
                                             <button onclick="updateQty('${p.id}-${k}', -1)" class="w-6 h-6 text-slate-400">-</button>
-                                            <input type="number" id="mqty-${p.id}-${k}" value="${cart[`${p.id}-${k}`] || 0}" class="w-8 text-center bg-transparent" readonly>
+                                            <input type="number" id="mqty-${p.id}-${k}" value="${cart[`${p.id}-${k}`] || 0}" class="w-8 text-center bg-transparent font-black" readonly>
                                             <button onclick="updateQty('${p.id}-${k}', 1)" class="w-6 h-6 text-blue-600">+</button>
                                         </div>
                                     </div>
@@ -382,7 +385,7 @@
                     if (p.type === 'metal') hasMetal = true;
                     const price = (userMode === 'revendedor' && cart[k] >= p.master) ? p.masterPrices[cable] : p.unitPrices[cable];
                     subtotal += price * cart[k]; totalItems += cart[k];
-                    list.innerHTML += `<div class="flex justify-between border-b pb-1 text-slate-600 font-bold uppercase"><span class="truncate pr-4">${p.name}</span><span>${cart[k]}x R$ ${(price*cart[k]).toFixed(2)}</span></div>`;
+                    list.innerHTML += `<div class="flex justify-between border-b pb-1 text-slate-600 font-bold uppercase"><span class="truncate pr-4">${p.name} (${cable.replace('c1','1.1m')})</span><span>${cart[k]}x R$ ${(price*cart[k]).toFixed(2)}</span></div>`;
                 }
             });
 
@@ -393,53 +396,62 @@
             countEl.innerText = totalItems;
         }
 
-        // --- PIX CRC16 REAL ---
-        function crc16(data) {
+        // --- LÓGICA PIX ADAPTADA DO PHP ---
+        function formatField(id, value) {
+            return id + value.length.toString().padStart(2, '0') + value;
+        }
+
+        function calculateCRC16(data) {
             let crc = 0xFFFF;
             for (let i = 0; i < data.length; i++) {
-                crc ^= data.charCodeAt(i) << 8;
+                crc ^= (data.charCodeAt(i) << 8);
                 for (let j = 0; j < 8; j++) {
-                    if ((crc & 0x8000) !== 0) crc = (crc << 1) ^ 0x1021;
-                    else crc <<= 1;
+                    if (crc & 0x8000) {
+                        crc = (crc << 1) ^ 0x1021;
+                    } else {
+                        crc <<= 1;
+                    }
+                    crc &= 0xFFFF;
                 }
             }
-            return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+            return crc.toString(16).toUpperCase().padStart(4, '0');
         }
 
         function generatePixPayload(amount) {
             const val = amount.toFixed(2);
-            // Seguindo a lógica do exemplo funcional: ID 26 deve ter subcampos
-            const domain = "0014BR.GOV.BCB.PIX";
-            const key = "0114" + PIX_KEY;
-            const merchantInfo = domain + key;
-            const merchantSection = "26" + merchantInfo.length.toString().padStart(2, '0') + merchantInfo;
+            let payload = "000201";
+            // ID 26: Merchant Account Info
+            const merchantInfo = "0014br.gov.bcb.pix" + formatField("01", PIX_KEY);
+            payload += formatField("26", merchantInfo);
+            payload += "52040000"; // Merchant Category Code
+            payload += "5303986";  // Currency BRL
+            payload += formatField("54", val); // Value
+            payload += "5802BR";   // Country Code
+            payload += formatField("59", PIX_NAME); // Name
+            payload += formatField("60", PIX_CITY); // City
+            payload += formatField("62", formatField("05", "***")); // ID Transação
+            payload += "6304"; // CRC Header
             
-            let payload = [
-                "000201",
-                merchantSection,
-                "52040000",
-                "5303986",
-                "54" + val.length.toString().padStart(2, '0') + val,
-                "5802BR",
-                "59" + PIX_NAME.length.toString().padStart(2, '0') + PIX_NAME,
-                "60" + PIX_CITY.length.toString().padStart(2, '0') + PIX_CITY,
-                "62070503***",
-                "6304"
-            ].join("");
-            
-            return payload + crc16(payload);
+            return payload + calculateCRC16(payload);
         }
 
         function showPixModal() {
-            if(currentTotal <= 0) { alert("O seu carrinho está vazio!"); return; }
+            if(currentTotal <= 0) { alert("Carrinho vazio!"); return; }
             const state = document.getElementById('state-selector').value;
-            if(!state) { alert("Selecione o estado para incluir o frete!"); return; }
+            if(!state) { alert("Selecione o estado para calcular o frete!"); return; }
 
             document.getElementById('pix-modal').classList.remove('hidden');
             document.getElementById('pix-value-display').innerText = `R$ ${currentTotal.toFixed(2)}`;
             lastPixPayload = generatePixPayload(currentTotal);
             document.getElementById('qrcode').innerHTML = "";
-            new QRCode(document.getElementById("qrcode"), { text: lastPixPayload, width: 200, height: 200 });
+            new QRCode(document.getElementById("qrcode"), { 
+                text: lastPixPayload, 
+                width: 200, 
+                height: 200,
+                colorDark : "#0f172a",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
         }
 
         function copyPixCode() {
