@@ -37,7 +37,7 @@
             100% { transform: scale(1); }
         }
 
-        /* Classes de controle de exibição baseadas no modo */
+        /* Controle de exibição por perfil */
         body.mode-consumidor .wholesale-only { display: none !important; }
         body.mode-consumidor .desktop-table-container { display: none !important; }
         body.mode-revendedor .desktop-cards-container { display: none !important; }
@@ -46,14 +46,14 @@
 </head>
 <body class="bg-slate-50 text-slate-800 pb-24 md:pb-12">
 
-    <!-- SELETOR INICIAL -->
+    <!-- SELETOR DE PERFIL -->
     <div id="auth-screen" class="fixed inset-0 z-[200] bg-slate-900 flex items-center justify-center p-4">
         <div class="max-w-md w-full text-center">
             <div class="bg-white p-2 rounded-2xl w-24 h-24 mx-auto mb-6 shadow-2xl flex items-center justify-center border-2 border-blue-500">
                 <img src="image_6acbb3.png" alt="Logo" class="max-h-full">
             </div>
             <h1 class="text-white text-3xl font-black uppercase italic mb-2 tracking-tighter">Bem-vindo à Fábrica</h1>
-            <p class="text-slate-400 text-sm mb-8 font-medium">Selecione seu perfil de acesso:</p>
+            <p class="text-slate-400 text-sm mb-8 font-medium italic">Selecione seu perfil de acesso para ver os preços</p>
             
             <div class="grid grid-cols-1 gap-4">
                 <button onclick="setUserMode('consumidor')" class="bg-white hover:bg-slate-100 text-slate-900 p-6 rounded-2xl transition shadow-xl flex flex-col items-center gap-2 group">
@@ -69,7 +69,7 @@
         </div>
     </div>
 
-    <!-- Cabeçalho Principal -->
+    <!-- Cabeçalho -->
     <header class="bg-slate-900 text-white shadow-lg md:mt-6">
         <div class="max-w-7xl mx-auto px-4 md:px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6">
@@ -85,7 +85,7 @@
             </div>
             
             <div class="flex flex-wrap justify-center gap-3 no-print">
-                <button onclick="exportToPDF()" class="wholesale-only flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition shadow-lg">
+                <button onclick="exportToPDF()" class="wholesale-only flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition shadow-lg text-white">
                     <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     EXPORTAR PDF
                 </button>
@@ -102,22 +102,28 @@
             </div>
             <div class="flex items-center gap-2 text-yellow-200">
                 <svg class="w-4 h-4 text-yellow-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-                <p class="text-[10px] font-black uppercase tracking-tight">Equipamento Bivolt (110v/220v)</p>
+                <p class="text-[10px] font-black uppercase tracking-tight tracking-widest uppercase italic">Equipamento Bivolt (110v/220v)</p>
             </div>
         </div>
 
-        <!-- Seção de Vídeo (Somente Consumidor) -->
+        <!-- Seção de Vídeo YouTube Shorts (Somente Consumidor) -->
         <section class="consumidor-video-section mb-10 flex flex-col items-center">
             <h3 class="font-black text-slate-900 uppercase text-xs mb-4 tracking-widest flex items-center gap-2">
                 <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l6.393 4-6.393 4z"/></svg>
-                Veja quem já comprou
+                Veja o produto em funcionamento
             </h3>
-            <div class="w-full max-w-[320px] aspect-[9/16] bg-slate-900 rounded-[2.5rem] p-3 shadow-2xl border-4 border-slate-800 relative overflow-hidden">
-                <video class="w-full h-full object-cover rounded-[2rem]" controls preload="metadata" poster="image_6acbb3.png">
-                    <source src="compradores.mp4" type="video/mp4">
-                    Seu navegador não suporta vídeos.
-                </video>
+            <div class="w-full max-w-[320px] aspect-[9/16] bg-slate-900 rounded-[2.8rem] p-3 shadow-2xl border-[6px] border-slate-800 relative overflow-hidden flex items-center justify-center">
+                <!-- Iframe do YouTube Shorts formatado -->
+                <iframe 
+                    class="w-full h-full rounded-[2.2rem]" 
+                    src="https://www.youtube.com/embed/KcZIRztMO8E?autoplay=0&rel=0&showinfo=0&modestbranding=1" 
+                    title="Vídeo de Compradores" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
             </div>
+            <p class="text-[9px] text-slate-400 mt-4 font-bold uppercase italic tracking-[0.2em]">Vídeo Real do Produto</p>
         </section>
 
         <section class="mb-10">
@@ -162,19 +168,18 @@
                     <p class="wholesale-only font-black text-blue-700 uppercase">→ Desconto aplicado na Caixa Master.</p>
                     <p>• Cabos 0,75mm² certificados Inmetro.</p>
                     <p class="wholesale-only font-black text-red-600 uppercase tracking-tighter">• Orçamentos sujeitos a Nota Fiscal (+10%).</p>
-                    <p class="font-bold text-slate-900 uppercase">→ Primeiro pedido: Somente via PIX.</p>
+                    <p class="font-bold text-slate-900 uppercase tracking-tighter">→ Primeiro pedido: Somente via PIX.</p>
                     <p class="wholesale-only font-medium text-slate-500 italic">• Faturamento para CNPJ sob análise comercial.</p>
                 </div>
             </div>
             <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-                <!-- Botão Instagram Clicável -->
                 <a href="https://instagram.com/filtrodelinhabr" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-white px-6 py-4 rounded-xl shadow-lg border-b-4 border-slate-600 text-center flex-1 min-w-[180px] transition group no-print">
                     <p class="text-[8px] font-black text-slate-400 uppercase mb-1 tracking-widest group-hover:text-blue-400 transition">Siga no Instagram</p>
                     <span class="text-lg font-black block tracking-tighter italic text-blue-400">@filtrodelinhabr</span>
                 </a>
                 <div class="bg-slate-900 text-white px-6 py-4 rounded-xl shadow-lg border-b-4 border-blue-600 text-center min-w-[180px]">
-                    <p class="text-[8px] font-black text-blue-400 uppercase mb-1 tracking-widest">WhatsApp Comercial</p>
-                    <span class="text-lg font-black block tracking-tighter italic">11 95494-1312</span>
+                    <p class="text-[8px] font-black text-blue-400 uppercase mb-1 tracking-widest text-white">WhatsApp Comercial</p>
+                    <span class="text-lg font-black block tracking-tighter italic text-white">11 95494-1312</span>
                 </div>
             </div>
         </footer>
@@ -233,12 +238,12 @@
             <div id="cart-items" class="max-h-36 overflow-y-auto mb-4 space-y-2 text-[10px]"></div>
             <div class="space-y-1 mb-4 px-2 border-t pt-2 text-slate-800 font-bold">
                 <div class="flex justify-between text-[10px]">
-                    <span class="text-slate-400 font-black uppercase text-white">Frete:</span> 
+                    <span class="text-slate-400 font-black uppercase">Frete:</span> 
                     <span id="cart-freight-val" class="font-mono text-green-600">R$ 0,00</span>
                 </div>
-                <div class="flex justify-between text-[10px] mt-1">
-                    <span class="text-slate-900 font-black uppercase tracking-tight text-white">Total Estimado:</span> 
-                    <span id="cart-total" class="font-black text-blue-700 text-lg italic font-mono text-white">R$ 0,00</span>
+                <div class="flex justify-between text-[10px] mt-1 text-white">
+                    <span class="text-slate-900 font-black uppercase tracking-tight">Total Estimado:</span> 
+                    <span id="cart-total" class="font-black text-blue-700 text-lg italic font-mono">R$ 0,00</span>
                 </div>
             </div>
             <button onclick="processOrder()" class="w-full bg-green-600 hover:bg-green-700 text-white font-black py-3 rounded-xl shadow-lg transition active:scale-95 uppercase tracking-widest text-xs">Enviar para o WhatsApp</button>
@@ -315,9 +320,10 @@
             userMode = mode;
             document.body.className = `bg-slate-50 text-slate-800 pb-24 md:pb-12 mode-${mode}`;
             document.getElementById('auth-screen').classList.add('hidden');
-            document.getElementById('user-banner-text').innerText = mode === 'consumidor' ? 'Catálogo Varejo' : 'Catálogo Atacado (Revendedores)';
+            document.getElementById('user-banner-text').innerText = mode === 'consumidor' ? 'Catálogo Varejo (Consumidor Final)' : 'Catálogo Atacado (Revendedores)';
             document.getElementById('header-subtitle').innerText = mode === 'consumidor' ? 'Tabela Varejo 2026' : 'Tabela Unificada • 2026';
             renderContent();
+            window.scrollTo(0,0);
         }
 
         function renderContent() {
@@ -331,16 +337,16 @@
                 const accentColor = isMetal ? 'text-orange-700' : 'text-slate-900';
                 const maxWatts = isMetal ? "1200W" : "900W";
                 
-                // Desktop: TABLE
+                // Desktop: TABLE (Modo Revendedor)
                 tableBody.innerHTML += `
                     <tr class="border-b border-slate-100 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'}">
                         <td class="p-2"><img src="${p.img}" class="w-12 h-12 object-cover rounded shadow-sm bg-slate-100" onerror="this.src='https://via.placeholder.com/100?text=Filtro'"></td>
-                        <td class="p-4 font-black uppercase tracking-tighter ${accentColor}">${p.name}<br><span class="text-[8px] text-slate-400 font-bold">BIVOLT • MAX ${maxWatts}</span></td>
+                        <td class="p-4 font-black uppercase tracking-tighter ${accentColor}">${p.name}<br><span class="text-[8px] text-slate-400 font-bold tracking-widest">BIVOLT • MAX ${maxWatts}</span></td>
                         ${['c1', 'c3', 'c5'].map(cable => `
                             <td class="p-2 text-center border-r border-slate-100">
                                 <div class="flex flex-col gap-1 items-center mb-2">
-                                    <span class="wholesale-only text-[16px] font-black text-blue-700 font-mono leading-none">R$ ${p.masterPrices[cable].toFixed(2)}</span>
-                                    <span class="text-[13px] font-bold text-slate-400 font-mono leading-none italic">R$ ${p.unitPrices[cable].toFixed(2)}</span>
+                                    <span class="wholesale-only text-[16px] font-black text-blue-700 font-mono leading-none">R$ ${p.masterPrices[cable]}</span>
+                                    <span class="text-[13px] font-bold text-slate-400 font-mono leading-none italic">R$ ${p.unitPrices[cable]}</span>
                                 </div>
                                 <div class="flex flex-col gap-1 items-center no-print">
                                     <div class="flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200">
@@ -354,7 +360,7 @@
                         <td class="wholesale-only p-4 text-center font-black bg-blue-50/50 text-blue-900">${p.master} un</td>
                     </tr>`;
 
-                // Desktop: CARDS
+                // Desktop: CARDS (Modo Consumidor)
                 desktopCardsContainer.innerHTML += `
                     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex items-stretch hover:shadow-md transition group h-full">
                         <div class="w-48 bg-slate-100 relative overflow-hidden flex items-center justify-center p-4 border-r border-slate-50">
@@ -367,16 +373,15 @@
                         <div class="flex-grow p-6 flex flex-col justify-between">
                             <div class="flex justify-between items-start">
                                 <h3 class="font-black text-xl uppercase tracking-tighter ${accentColor} leading-tight mb-4">${p.name}</h3>
-                                <div class="flex gap-0.5 bg-slate-100 p-1 rounded-lg border border-slate-200" title="Padrões Compatíveis">
+                                <div class="flex gap-0.5 bg-slate-100 p-1 rounded-lg border border-slate-200">
                                     ${['A','B','C','J','N'].map(t => svgIcons.pin(t)).join('')}
                                 </div>
                             </div>
-
                             <div class="grid grid-cols-3 gap-3 mb-4">
                                 ${['c1','c3','c5'].map(k => `
                                     <div class="flex flex-col">
                                         <span class="text-[8px] font-black text-slate-400 uppercase mb-1 tracking-widest leading-none">${k.replace('c1','1.1m').replace('c3','3m').replace('c5','5m')}</span>
-                                        <span class="text-xl font-black text-slate-900 leading-none">R$ ${p.unitPrices[k].toFixed(2)}</span>
+                                        <span class="text-xl font-black text-slate-900 leading-none">R$ ${p.unitPrices[k]}</span>
                                         <div class="flex items-center mt-3 bg-slate-50 rounded-lg p-1 border border-slate-100 w-fit">
                                             <button onclick="updateQty('${p.id}-${k}', -1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm text-slate-400">-</button>
                                             <input type="number" id="dqty-${p.id}-${k}" value="${cart[`${p.id}-${k}`] || 0}" class="w-8 text-center bg-transparent font-black text-[10px]">
@@ -384,7 +389,6 @@
                                         </div>
                                     </div>`).join('')}
                             </div>
-
                             <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
                                 <div class="flex flex-col gap-1.5">
                                     <span class="text-[8px] font-black text-green-600 uppercase leading-none tracking-widest">Ideal Para:</span>
@@ -398,7 +402,7 @@
                         </div>
                     </div>`;
 
-                // 3. Mobile: CARDS
+                // Mobile: CARDS (Geral)
                 cardsContainer.innerHTML += `
                     <div class="bg-white rounded-xl border border-slate-200 p-4 border-l-4 ${isMetal ? 'border-l-orange-500' : 'border-l-slate-800'}">
                         <div class="flex gap-4 mb-4 items-center">
@@ -418,8 +422,8 @@
                                     <div class="flex flex-col">
                                         <span class="text-[9px] font-black text-slate-400 uppercase leading-none mb-1">${k.replace('c1','1.1m').replace('c3','3m').replace('c5','5m')}</span>
                                         <div class="flex items-center gap-2">
-                                            <span class="wholesale-only text-[16px] font-black text-blue-700 font-mono">R$ ${p.masterPrices[k].toFixed(2)}</span>
-                                            <span class="text-[14px] font-bold ${userMode === 'revendedor' ? 'text-slate-300 italic' : 'text-slate-900 font-black font-mono'}">R$ ${p.unitPrices[k].toFixed(2)}</span>
+                                            <span class="wholesale-only text-[16px] font-black text-blue-700 font-mono">R$ ${p.masterPrices[k]}</span>
+                                            <span class="text-[14px] font-bold ${userMode === 'revendedor' ? 'text-slate-300 italic' : 'text-slate-900 font-black font-mono'}">R$ ${p.unitPrices[k]}</span>
                                         </div>
                                     </div>
                                     <div class="flex flex-col items-end gap-1">
@@ -457,16 +461,16 @@
             list.innerHTML = ""; 
             let subtotal = 0; let totalItems = 0; let hasMetal = false;
             const state = document.getElementById('state-selector').value;
-
             Object.keys(cart).forEach(k => {
                 if(cart[k] > 0) {
                     const [id, cable] = k.split('-'); const p = products.find(prod => prod.id == id);
                     const qty = cart[k];
                     if (p.type === 'metal') hasMetal = true;
-                    const price = (userMode === 'revendedor' && qty >= p.master) ? p.masterPrices[cable] : p.unitPrices[cable];
+                    const priceStr = (userMode === 'revendedor' && qty >= p.master) ? p.masterPrices[cable] : p.unitPrices[cable];
+                    const priceNum = parseFloat(priceStr.replace(',', '.'));
                     const label = cable.replace('c1','1.1m').replace('c3','3m').replace('c5','5m');
-                    subtotal += price * qty; totalItems += qty;
-                    list.innerHTML += `<div class="flex justify-between border-b border-slate-50 pb-1"><span>${p.name} (${label})</span><span>${qty}x R$ ${(price*qty).toFixed(2)}</span></div>`;
+                    subtotal += priceNum * qty; totalItems += qty;
+                    list.innerHTML += `<div class="flex justify-between border-b border-slate-50 pb-1 text-white"><span>${p.name} (${label})</span><span>${qty}x R$ ${(priceNum*qty).toFixed(2)}</span></div>`;
                 }
             });
             const freightValue = calculateFreight(totalItems, hasMetal, state);
@@ -486,9 +490,10 @@
                     const qty = cart[k];
                     if (p.type === 'metal') hasMetal = true;
                     const label = cable.replace('c1','1.1m').replace('c3','3m').replace('c5','5m');
-                    const price = (userMode === 'revendedor' && qty >= p.master) ? p.masterPrices[cable] : p.unitPrices[cable];
-                    subtotal += price * qty; totalItems += qty;
-                    msg += `📦 *${p.name}*\n📏 ${label} | 🔢 ${qty} un | 💰 R$ ${(price*qty).toFixed(2)}\n\n`;
+                    const priceStr = (userMode === 'revendedor' && qty >= p.master) ? p.masterPrices[cable] : p.unitPrices[cable];
+                    const priceNum = parseFloat(priceStr.replace(',', '.'));
+                    subtotal += priceNum * qty; totalItems += qty;
+                    msg += `📦 *${p.name}*\n📏 ${label} | 🔢 ${qty} un | 💰 R$ ${(priceNum*qty).toFixed(2)}\n\n`;
                 }
             });
             if(totalItems === 0) { alert("Carrinho vazio!"); return; }
