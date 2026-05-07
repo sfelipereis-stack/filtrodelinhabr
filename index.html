@@ -37,13 +37,15 @@
             100% { transform: scale(1); }
         }
 
-        /* Esconder elementos de atacado para consumidor */
+        /* Classes de controle de exibição baseadas no modo */
         body.mode-consumidor .wholesale-only { display: none !important; }
+        body.mode-consumidor .desktop-table-container { display: none !important; }
+        body.mode-revendedor .desktop-cards-container { display: none !important; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 pb-24 md:pb-12">
 
-    <!-- SELETOR INICIAL (MODAL) -->
+    <!-- SELETOR INICIAL -->
     <div id="auth-screen" class="fixed inset-0 z-[200] bg-slate-900 flex items-center justify-center p-4">
         <div class="max-w-md w-full text-center">
             <div class="bg-white p-2 rounded-2xl w-24 h-24 mx-auto mb-6 shadow-2xl flex items-center justify-center">
@@ -55,12 +57,12 @@
             <div class="grid grid-cols-1 gap-4">
                 <button onclick="setUserMode('consumidor')" class="bg-white hover:bg-slate-100 text-slate-900 p-6 rounded-2xl transition shadow-xl flex flex-col items-center gap-2 group">
                     <span class="font-black text-xl uppercase tracking-tighter">Consumidor Final</span>
-                    <span class="text-xs text-slate-500 font-medium">Compre avulso para sua casa ou escritório</span>
+                    <span class="text-xs text-slate-500 font-medium tracking-tight">Visualização em vitrine e preços de varejo</span>
                 </button>
                 
                 <button onclick="setUserMode('revendedor')" class="bg-blue-600 hover:bg-blue-700 text-white p-6 rounded-2xl transition shadow-xl flex flex-col items-center gap-2 group border-b-4 border-blue-800">
                     <span class="font-black text-xl uppercase tracking-tighter italic">Revendedor / Lojista</span>
-                    <span class="text-blue-200 text-xs font-medium">Acesso a preços de fábrica e compras em lote</span>
+                    <span class="text-blue-200 text-xs font-medium tracking-tight">Preços de fábrica e compras em lote</span>
                 </button>
             </div>
         </div>
@@ -95,7 +97,7 @@
         <div class="bg-blue-600 text-white rounded-xl p-3 shadow-xl flex flex-col md:flex-row items-center justify-center gap-4 mb-8 text-center border-b-4 border-blue-800">
             <div class="flex items-center gap-2 text-white">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                <p id="user-banner-text" class="text-[10px] font-black uppercase tracking-wide">Catálogo de Produtos</p>
+                <p id="user-banner-text" class="text-[10px] font-black uppercase tracking-wide">Acesso Permitido</p>
             </div>
             <div class="flex items-center gap-2 text-yellow-200">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
@@ -104,7 +106,7 @@
         </div>
 
         <section class="mb-10">
-            <div class="flex flex-col md:flex-row items-center justify-between mb-4 gap-4">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
                 <h2 class="text-lg font-black text-slate-900 flex items-center gap-2 uppercase tracking-tight">
                     <span class="w-6 h-1 bg-blue-600 rounded-full"></span>
                     Produtos Disponíveis
@@ -115,9 +117,14 @@
                 </div>
             </div>
             
+            <!-- Mobile: Cards -->
             <div id="cards-container" class="grid grid-cols-1 gap-4 md:hidden no-print"></div>
 
-            <div class="hidden md:block bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden">
+            <!-- Desktop Consumidor: Cards Retangulares -->
+            <div id="desktop-cards-container" class="desktop-cards-container hidden md:grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
+
+            <!-- Desktop Revendedor: Tabela -->
+            <div class="desktop-table-container hidden md:block bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-[11px] table-fixed border-collapse">
                         <thead>
@@ -149,8 +156,8 @@
                 </div>
             </div>
             <div class="bg-slate-900 text-white px-6 py-4 rounded-xl shadow-lg border-b-4 border-blue-600 text-center min-w-[180px]">
-                <p class="text-[8px] font-black text-blue-400 uppercase mb-1 tracking-widest">WhatsApp Comercial</p>
-                <span class="text-lg font-black block tracking-tighter italic">11 95494-1312</span>
+                <p class="text-[8px] font-black text-blue-400 uppercase mb-1 tracking-widest text-white">WhatsApp Comercial</p>
+                <span class="text-lg font-black block tracking-tighter italic text-white">11 95494-1312</span>
             </div>
         </footer>
     </main>
@@ -180,13 +187,14 @@
             <div class="space-y-1 mb-4 px-2 border-t pt-2 text-slate-800">
                 <div class="flex justify-between text-[10px]"><span>Total Estimado:</span> <span id="cart-total" class="font-black text-blue-700 text-lg italic font-mono">R$ 0,00</span></div>
             </div>
-            <button onclick="processOrder()" class="w-full bg-green-600 hover:bg-green-700 text-white font-black py-3 rounded-xl shadow-lg transition active:scale-95">ENVIAR PARA O WHATSAPP</button>
+            <button onclick="processOrder()" class="w-full bg-green-600 hover:bg-green-700 text-white font-black py-3 rounded-xl shadow-lg transition active:scale-95 uppercase tracking-tighter">Enviar para o WhatsApp</button>
         </div>
     </div>
 
+    <!-- Carrinho Badge -->
     <button id="cart-badge" onclick="toggleCart()" class="fixed bottom-6 right-6 z-40 bg-blue-600 text-white p-4 rounded-full shadow-2xl transition-transform flex items-center gap-3">
         <span id="cart-count" class="bg-red-600 text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">0</span>
-        <span class="font-black text-xs uppercase hidden md:inline">Meu Pedido</span>
+        <span class="font-black text-xs uppercase hidden md:inline text-white">Meu Pedido</span>
     </button>
 
     <script>
@@ -203,26 +211,29 @@
             { id: 7, name: "Filtro 10 Tomadas Metal", img: "filtro_10_metal.jpg", master: 8, masterPrices: { c1: 59.00, c3: 64.00, c5: 68.00 }, unitPrices: { c1: 61.00, c3: 66.00, c5: 70.00 } }
         ];
 
-        const freightTable = { 'SP': 40, 'RJ': 40, 'MG': 40, 'ES': 40, 'PR': 50, 'SC': 50, 'RS': 50, 'GO': 60, 'MT': 60, 'MS': 60, 'DF': 60, 'BA': 100, 'PE': 100, 'CE': 100, 'MA': 100, 'PI': 100, 'RN': 100, 'PB': 100, 'AL': 100, 'SE': 100, 'AM': 120, 'PA': 120, 'TO': 120, 'RO': 120, 'RR': 120, 'AP': 120, 'AC': 120 };
+        const freightTable = { 'SP': 40, 'RJ': 40, 'MG': 40, 'ES': 40, 'PR': 50, 'SC': 50, 'RS': 50, 'GO': 60, 'MT': 60, 'MS': 60, 'DF': 60, 'BA': 100, 'AM': 120 };
 
         function setUserMode(mode) {
             userMode = mode;
             document.body.className = `bg-slate-50 text-slate-800 pb-24 md:pb-12 mode-${mode}`;
             document.getElementById('auth-screen').classList.add('hidden');
-            document.getElementById('user-banner-text').innerText = mode === 'consumidor' ? 'Catálogo Varejo' : 'Acesso Revendedor (Atacado & Varejo)';
-            document.getElementById('header-subtitle').innerText = mode === 'consumidor' ? 'Tabela Varejo 2026' : 'Tabela Unificada • Atacado & Varejo';
+            document.getElementById('user-banner-text').innerText = mode === 'consumidor' ? 'Catálogo Varejo (Consumidor)' : 'Catálogo Atacado (Revendedor)';
+            document.getElementById('header-subtitle').innerText = mode === 'consumidor' ? 'Tabela Varejo 2026' : 'Tabela Unificada • 2026';
             renderContent();
         }
 
         function renderContent() {
             const tableBody = document.getElementById('table-body');
             const cardsContainer = document.getElementById('cards-container');
-            tableBody.innerHTML = ""; cardsContainer.innerHTML = "";
+            const desktopCardsContainer = document.getElementById('desktop-cards-container');
+            
+            tableBody.innerHTML = ""; cardsContainer.innerHTML = ""; desktopCardsContainer.innerHTML = "";
 
             products.forEach((p, idx) => {
                 const isMetal = p.name.includes('Metal');
                 const accentColor = isMetal ? 'text-orange-700' : 'text-slate-900';
                 
+                // 1. Desktop: TABLE (Modo Revendedor)
                 tableBody.innerHTML += `
                     <tr class="border-b border-slate-100 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'}">
                         <td class="p-2"><img src="${p.img}" class="w-12 h-12 object-cover rounded shadow-sm bg-slate-100" onerror="this.src='https://via.placeholder.com/100?text=Filtro'"></td>
@@ -231,13 +242,13 @@
                             <td class="p-2 text-center border-r border-slate-100">
                                 <div class="flex flex-col gap-1 items-center mb-2">
                                     <span class="wholesale-only text-[16px] font-black text-blue-700 font-mono leading-none">R$ ${p.masterPrices[cable].toFixed(2)}</span>
-                                    <span class="text-[13px] font-bold text-slate-400 font-mono leading-none ${userMode === 'revendedor' ? 'italic' : 'text-slate-900 font-black'}">R$ ${p.unitPrices[cable].toFixed(2)}</span>
+                                    <span class="text-[13px] font-bold text-slate-400 font-mono leading-none italic">R$ ${p.unitPrices[cable].toFixed(2)}</span>
                                 </div>
                                 <div class="flex flex-col gap-1 items-center no-print">
                                     <div class="flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200">
-                                        <button onclick="updateQty('${p.id}-${cable}', -1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm text-slate-400">-</button>
+                                        <button onclick="updateQty('${p.id}-${cable}', -1)" class="w-6 h-6 bg-white rounded shadow-sm text-slate-400">-</button>
                                         <input type="number" id="qty-${p.id}-${cable}" value="${cart[`${p.id}-${cable}`] || 0}" class="w-8 text-center bg-transparent font-black text-[10px]">
-                                        <button onclick="updateQty('${p.id}-${cable}', 1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm text-blue-600">+</button>
+                                        <button onclick="updateQty('${p.id}-${cable}', 1)" class="w-6 h-6 bg-white rounded shadow-sm text-blue-600">+</button>
                                     </div>
                                     <button onclick="addBox('${p.id}-${cable}')" class="wholesale-only text-[8px] font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-200 uppercase tracking-tighter">+ CAIXA</button>
                                 </div>
@@ -245,10 +256,37 @@
                         <td class="wholesale-only p-4 text-center font-black bg-blue-50/50">${p.master} un</td>
                     </tr>`;
 
+                // 2. Desktop: CARDS RETANGULARES (Modo Consumidor)
+                desktopCardsContainer.innerHTML += `
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex items-stretch hover:shadow-md transition group">
+                        <div class="w-48 bg-slate-100 relative overflow-hidden flex items-center justify-center p-4">
+                            <img src="${p.img}" class="max-h-full max-w-full object-contain group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/200?text=Filtro'">
+                            ${isMetal ? '<span class="absolute top-2 left-2 bg-orange-500 text-white text-[8px] font-black px-2 py-0.5 rounded-full">METAL</span>' : ''}
+                        </div>
+                        <div class="flex-grow p-6 flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-black text-xl uppercase tracking-tighter ${accentColor} leading-none mb-4">${p.name}</h3>
+                                <div class="grid grid-cols-3 gap-4">
+                                    ${['c1','c3','c5'].map(k => `
+                                        <div class="flex flex-col">
+                                            <span class="text-[9px] font-black text-slate-400 uppercase mb-1">Cabo ${k.replace('c1','1.1m').replace('c3','3m').replace('c5','5m')}</span>
+                                            <span class="text-lg font-black text-slate-900 leading-none">R$ ${p.unitPrices[k].toFixed(2)}</span>
+                                            <div class="flex items-center mt-3 bg-slate-50 rounded-lg p-1 border border-slate-100 w-fit">
+                                                <button onclick="updateQty('${p.id}-${k}', -1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm text-slate-400">-</button>
+                                                <input type="number" id="dqty-${p.id}-${k}" value="${cart[`${p.id}-${k}`] || 0}" class="w-8 text-center bg-transparent font-black text-[10px]">
+                                                <button onclick="updateQty('${p.id}-${k}', 1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm text-blue-600">+</button>
+                                            </div>
+                                        </div>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+
+                // 3. Mobile: CARDS (Ambos os modos)
                 cardsContainer.innerHTML += `
                     <div class="bg-white rounded-xl border border-slate-200 p-4 border-l-4 ${isMetal ? 'border-l-orange-500' : 'border-l-slate-800'}">
                         <div class="flex gap-4 mb-4 items-center">
-                            <img src="${p.img}" class="w-16 h-16 object-cover rounded-xl shadow-sm" onerror="this.src='https://via.placeholder.com/100?text=Filtro'">
+                            <img src="${p.img}" class="w-16 h-16 object-cover rounded-xl shadow-sm bg-slate-50" onerror="this.src='https://via.placeholder.com/100?text=Filtro'">
                             <div>
                                 <span class="font-black uppercase text-xs ${accentColor}">${p.name}</span>
                                 <div class="wholesale-only bg-blue-600 text-white text-[8px] font-black px-2 py-0.5 rounded w-fit mt-1">${p.master} UNID/CX</div>
@@ -258,7 +296,7 @@
                             ${['c1','c3','c5'].map(k => `
                                 <div class="flex items-center justify-between">
                                     <div class="flex flex-col">
-                                        <span class="text-[9px] font-black text-slate-400 uppercase mb-1">CABO ${k.replace('c1','1.1m').replace('c3','3m').replace('c5','5m')}</span>
+                                        <span class="text-[9px] font-black text-slate-400 uppercase leading-none mb-1">CABO ${k.replace('c1','1.1m').replace('c3','3m').replace('c5','5m')}</span>
                                         <div class="flex items-center gap-2">
                                             <span class="wholesale-only text-[16px] font-black text-blue-700">R$ ${p.masterPrices[k].toFixed(2)}</span>
                                             <span class="text-[14px] font-bold ${userMode === 'revendedor' ? 'text-slate-300 italic' : 'text-slate-900 font-black'}">R$ ${p.unitPrices[k].toFixed(2)}</span>
@@ -288,8 +326,9 @@
 
         function updateQty(key, delta) {
             cart[key] = Math.max(0, (cart[key] || 0) + delta);
-            if (document.getElementById(`qty-${key}`)) document.getElementById(`qty-${key}`).value = cart[key];
-            if (document.getElementById(`mqty-${key}`)) document.getElementById(`mqty-${key}`).value = cart[key];
+            // Sincronizar todos os inputs possíveis daquele produto/cabo
+            const ids = [`qty-${key}`, `mqty-${key}`, `dqty-${key}`];
+            ids.forEach(id => { if(document.getElementById(id)) document.getElementById(id).value = cart[key]; });
             updateCartSummary();
         }
 
