@@ -37,7 +37,6 @@
             100% { transform: scale(1); }
         }
 
-        /* Classes de controle de exibição baseadas no modo */
         body.mode-consumidor .wholesale-only { display: none !important; }
         body.mode-consumidor .desktop-table-container { display: none !important; }
         body.mode-revendedor .desktop-cards-container { display: none !important; }
@@ -48,11 +47,11 @@
     <!-- SELETOR INICIAL -->
     <div id="auth-screen" class="fixed inset-0 z-[200] bg-slate-900 flex items-center justify-center p-4">
         <div class="max-w-md w-full text-center">
-            <div class="bg-white p-2 rounded-2xl w-24 h-24 mx-auto mb-6 shadow-2xl flex items-center justify-center">
+            <div class="bg-white p-2 rounded-2xl w-24 h-24 mx-auto mb-6 shadow-2xl flex items-center justify-center border-2 border-blue-500">
                 <img src="image_6acbb3.png" alt="Logo" class="max-h-full">
             </div>
             <h1 class="text-white text-3xl font-black uppercase italic mb-2 tracking-tighter">Bem-vindo à Fábrica</h1>
-            <p class="text-slate-400 text-sm mb-8">Selecione seu perfil de acesso:</p>
+            <p class="text-slate-400 text-sm mb-8 font-medium">Selecione seu perfil de acesso:</p>
             
             <div class="grid grid-cols-1 gap-4">
                 <button onclick="setUserMode('consumidor')" class="bg-white hover:bg-slate-100 text-slate-900 p-6 rounded-2xl transition shadow-xl flex flex-col items-center gap-2 group">
@@ -61,7 +60,7 @@
                 </button>
                 
                 <button onclick="setUserMode('revendedor')" class="bg-blue-600 hover:bg-blue-700 text-white p-6 rounded-2xl transition shadow-xl flex flex-col items-center gap-2 group border-b-4 border-blue-800">
-                    <span class="font-black text-xl uppercase tracking-tighter italic">Revendedor / Lojista</span>
+                    <span class="font-black text-xl uppercase tracking-tighter italic text-white">Revendedor / Lojista</span>
                     <span class="text-blue-200 text-xs font-medium tracking-tight">Preços de fábrica e compras em lote</span>
                 </button>
             </div>
@@ -76,16 +75,16 @@
                     <img src="image_6acbb3.png" alt="Logo" class="max-w-full max-h-full object-contain">
                 </div>
                 <div class="text-center md:text-left">
-                    <h1 class="text-2xl font-black tracking-tight uppercase italic mb-0 text-white">Fábrica de Filtros</h1>
-                    <p id="header-subtitle" class="text-blue-400 font-medium tracking-[0.2em] text-[10px] uppercase">
+                    <h1 class="text-2xl font-black tracking-tight uppercase italic mb-0 text-white leading-none">Fábrica de Filtros</h1>
+                    <p id="header-subtitle" class="text-blue-400 font-medium tracking-[0.2em] text-[10px] uppercase mt-1">
                         Catálogo Digital • 2026
                     </p>
                 </div>
             </div>
             
             <div class="flex flex-wrap justify-center gap-3 no-print">
-                <button onclick="exportToPDF()" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition shadow-lg">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <button onclick="exportToPDF()" class="wholesale-only flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition shadow-lg">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     EXPORTAR PDF
                 </button>
             </div>
@@ -96,12 +95,12 @@
         <!-- Banner Condições -->
         <div class="bg-blue-600 text-white rounded-xl p-3 shadow-xl flex flex-col md:flex-row items-center justify-center gap-4 mb-8 text-center border-b-4 border-blue-800">
             <div class="flex items-center gap-2 text-white">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
                 <p id="user-banner-text" class="text-[10px] font-black uppercase tracking-wide">Acesso Permitido</p>
             </div>
             <div class="flex items-center gap-2 text-yellow-200">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-                <p class="text-[10px] font-black uppercase tracking-tight">Pagamento: Somente via PIX</p>
+                <svg class="w-4 h-4 text-yellow-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                <p class="text-[10px] font-black uppercase tracking-tight">Equipamento Bivolt (110v/220v)</p>
             </div>
         </div>
 
@@ -117,24 +116,20 @@
                 </div>
             </div>
             
-            <!-- Mobile: Cards -->
             <div id="cards-container" class="grid grid-cols-1 gap-4 md:hidden no-print"></div>
-
-            <!-- Desktop Consumidor: Cards Retangulares -->
             <div id="desktop-cards-container" class="desktop-cards-container hidden md:grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
 
-            <!-- Desktop Revendedor: Tabela -->
             <div class="desktop-table-container hidden md:block bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-[11px] table-fixed border-collapse">
                         <thead>
-                            <tr class="bg-slate-900 text-white">
+                            <tr class="bg-slate-900 text-white font-bold uppercase tracking-widest">
                                 <th class="p-4 col-foto"></th>
-                                <th class="p-4 font-bold uppercase tracking-widest border-r border-slate-800 col-modelo">Modelo</th>
-                                <th class="p-4 font-bold uppercase tracking-widest text-center border-r border-slate-800 col-precos">Cabo 1,1m</th>
-                                <th class="p-4 font-bold uppercase tracking-widest text-center border-r border-slate-800 col-precos">Cabo 3,0m</th>
-                                <th class="p-4 font-bold uppercase tracking-widest text-center border-r border-slate-800 col-precos">Cabo 5,0m</th>
-                                <th class="wholesale-only p-4 font-bold uppercase tracking-widest text-center bg-blue-700 col-master">Mín. Caixa</th>
+                                <th class="p-4 border-r border-slate-800 col-modelo">Modelo</th>
+                                <th class="p-4 text-center border-r border-slate-800 col-precos">Cabo 1,1m</th>
+                                <th class="p-4 text-center border-r border-slate-800 col-precos">Cabo 3,0m</th>
+                                <th class="p-4 text-center border-r border-slate-800 col-precos">Cabo 5,0m</th>
+                                <th class="wholesale-only p-4 text-center bg-blue-700 col-master">Mín. Caixa</th>
                             </tr>
                         </thead>
                         <tbody id="table-body" class="text-slate-700"></tbody>
@@ -144,15 +139,15 @@
         </section>
 
         <footer class="mt-8 bg-white border border-slate-200 rounded-2xl p-6 flex flex-col lg:flex-row justify-between items-center gap-8 shadow-sm">
-            <div class="flex-1 text-center lg:text-left text-[10px] text-slate-600">
-                <h4 class="font-black text-slate-900 uppercase mb-3 text-xs tracking-widest">Informações Gerais</h4>
+            <div class="flex-1 text-center lg:text-left text-[10px] text-slate-600 font-medium">
+                <h4 class="font-black text-slate-900 uppercase mb-3 text-xs tracking-widest text-white">Informações Gerais</h4>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-1.5">
                     <p>• Fusível reserva incluso em todos os modelos.</p>
                     <p class="wholesale-only font-black text-blue-700 uppercase">→ Desconto aplicado na Caixa Master.</p>
                     <p>• Cabos 0,75mm² certificados Inmetro.</p>
-                    <p class="font-black text-red-600 uppercase">• Orçamentos sujeitos a Nota Fiscal (+10%).</p>
-                    <p class="font-bold text-slate-900">• Primeiro pedido: Somente via PIX.</p>
-                    <p>• Faturamento para CNPJ sob análise comercial.</p>
+                    <p class="wholesale-only font-black text-red-600 uppercase tracking-tighter">• Orçamentos sujeitos a Nota Fiscal (+10%).</p>
+                    <p class="font-bold text-slate-900 uppercase">→ Primeiro pedido: Somente via PIX.</p>
+                    <p class="wholesale-only font-medium text-slate-500 italic">• Faturamento para CNPJ sob análise comercial.</p>
                 </div>
             </div>
             <div class="bg-slate-900 text-white px-6 py-4 rounded-xl shadow-lg border-b-4 border-blue-600 text-center min-w-[180px]">
@@ -166,35 +161,71 @@
     <div id="cart-drawer" class="fixed bottom-0 left-0 right-0 z-50 no-print transition-transform transform translate-y-full">
         <div class="bg-white border-t border-slate-200 shadow-2xl p-4 md:max-w-md md:mx-auto md:mb-4 md:rounded-2xl md:border">
             <div class="flex items-center justify-between mb-3 border-b pb-2">
-                <h3 class="font-black text-slate-900 uppercase text-xs flex items-center gap-2">
+                <h3 class="font-black text-slate-900 uppercase text-xs flex items-center gap-2 text-white">
                     <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     Resumo do Pedido
                 </h3>
-                <button onclick="toggleCart()" class="p-1"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg></button>
+                <button onclick="toggleCart()" class="p-1"><svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg></button>
             </div>
             <div class="mb-4 bg-slate-50 p-3 rounded-lg border border-slate-100">
-                <label class="block text-[8px] font-black text-slate-400 uppercase mb-1">Selecione o Destino</label>
+                <label class="block text-[8px] font-black text-slate-400 uppercase mb-1 tracking-widest">Estado de Entrega (Frete)</label>
                 <select id="state-selector" onchange="updateCartSummary()" class="w-full bg-white border border-slate-200 p-2 rounded text-xs font-bold focus:ring-2 focus:ring-blue-500">
-                    <option value="">Destino do Frete...</option>
-                    <option value="SP">SUDESTE (R$ 40,00)</option>
-                    <option value="PR">SUL (R$ 50,00)</option>
-                    <option value="GO">CENTRO-OESTE (R$ 60,00)</option>
-                    <option value="BA">NORDESTE (R$ 100,00)</option>
-                    <option value="AM">NORTE (R$ 120,00)</option>
+                    <option value="">Selecione o Estado...</option>
+                    <optgroup label="SUL / SUDESTE">
+                        <option value="SP">São Paulo</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="PR">Paraná</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                    </optgroup>
+                    <optgroup label="CENTRO-OESTE">
+                        <option value="GO">Goiás / DF</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                    </optgroup>
+                    <optgroup label="NORDESTE">
+                        <option value="BA">Bahia</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="CE">Ceará</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="SE">Sergipe</option>
+                    </optgroup>
+                    <optgroup label="NORTE">
+                        <option value="AM">Amazonas</option>
+                        <option value="PA">Pará</option>
+                        <option value="TO">Tocantins</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AC">Acre</option>
+                    </optgroup>
                 </select>
             </div>
-            <div id="cart-items" class="max-h-40 overflow-y-auto mb-4 space-y-2 text-[10px]"></div>
-            <div class="space-y-1 mb-4 px-2 border-t pt-2 text-slate-800">
-                <div class="flex justify-between text-[10px]"><span>Total Estimado:</span> <span id="cart-total" class="font-black text-blue-700 text-lg italic font-mono">R$ 0,00</span></div>
+            <div id="cart-items" class="max-h-36 overflow-y-auto mb-4 space-y-2 text-[10px]"></div>
+            <div class="space-y-1 mb-4 px-2 border-t pt-2 text-slate-800 font-bold">
+                <div class="flex justify-between text-[10px]">
+                    <span class="text-slate-400 font-black uppercase text-white">Frete:</span> 
+                    <span id="cart-freight-val" class="font-mono text-green-600">R$ 0,00</span>
+                </div>
+                <div class="flex justify-between text-[10px] mt-1">
+                    <span class="text-slate-900 font-black uppercase tracking-tight text-white">Total Estimado:</span> 
+                    <span id="cart-total" class="font-black text-blue-700 text-lg italic font-mono text-white">R$ 0,00</span>
+                </div>
             </div>
-            <button onclick="processOrder()" class="w-full bg-green-600 hover:bg-green-700 text-white font-black py-3 rounded-xl shadow-lg transition active:scale-95 uppercase tracking-tighter">Enviar para o WhatsApp</button>
+            <button onclick="processOrder()" class="w-full bg-green-600 hover:bg-green-700 text-white font-black py-3 rounded-xl shadow-lg transition active:scale-95 uppercase tracking-widest text-xs text-white">Enviar para o WhatsApp</button>
         </div>
     </div>
 
     <!-- Carrinho Badge -->
-    <button id="cart-badge" onclick="toggleCart()" class="fixed bottom-6 right-6 z-40 bg-blue-600 text-white p-4 rounded-full shadow-2xl transition-transform flex items-center gap-3">
-        <span id="cart-count" class="bg-red-600 text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">0</span>
-        <span class="font-black text-xs uppercase hidden md:inline text-white">Meu Pedido</span>
+    <button id="cart-badge" onclick="toggleCart()" class="fixed bottom-6 right-6 z-40 bg-blue-600 text-white p-4 rounded-full shadow-2xl transition-transform flex items-center gap-3 border-2 border-blue-400">
+        <span id="cart-count" class="bg-red-600 text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border-2 border-white text-white text-white">0</span>
+        <span class="font-black text-xs uppercase hidden md:inline text-white tracking-widest text-white">Meu Pedido</span>
     </button>
 
     <script>
@@ -202,22 +233,69 @@
         let cart = {};
 
         const products = [
-            { id: 1, name: "Filtro 3 Tomadas ABS", img: "filtro_3_abs.jpg", master: 20, masterPrices: { c1: 22.90, c3: 26.90, c5: 34.90 }, unitPrices: { c1: 24.90, c3: 28.90, c5: 36.90 } },
-            { id: 2, name: "Filtro 4 Tomadas ABS", img: "filtro_4_abs.jpg", master: 20, masterPrices: { c1: 24.50, c3: 29.50, c5: 38.50 }, unitPrices: { c1: 26.50, c3: 31.50, c5: 40.50 } },
-            { id: 3, name: "Filtro 5 Tomadas ABS", img: "filtro_5_abs.jpg", master: 20, masterPrices: { c1: 25.90, c3: 29.90, c5: 38.90 }, unitPrices: { c1: 27.90, c3: 31.90, c5: 40.90 } },
-            { id: 4, name: "Filtro 6 Tomadas ABS", img: "filtro_6_abs.jpg", master: 16, masterPrices: { c1: 31.10, c3: 35.25, c5: 39.25 }, unitPrices: { c1: 33.10, c3: 37.25, c5: 41.25 } },
-            { id: 5, name: "Filtro 6 Tomadas Metal", img: "filtro_6_metal.jpg", master: 12, masterPrices: { c1: 43.00, c3: 47.00, c5: 51.00 }, unitPrices: { c1: 45.00, c3: 49.00, c5: 53.00 } },
-            { id: 6, name: "Filtro 8 Tomadas Metal", img: "filtro_8_metal.jpg", master: 10, masterPrices: { c1: 52.00, c3: 56.00, c5: 60.00 }, unitPrices: { c1: 54.00, c3: 58.00, c5: 62.00 } },
-            { id: 7, name: "Filtro 10 Tomadas Metal", img: "filtro_10_metal.jpg", master: 8, masterPrices: { c1: 59.00, c3: 64.00, c5: 68.00 }, unitPrices: { c1: 61.00, c3: 66.00, c5: 70.00 } }
+            { id: 1, name: "Filtro 3 Tomadas ABS", type: "abs", img: "filtro_3_abs.jpg", master: 20, masterPrices: { c1: 22.90, c3: 26.90, c5: 34.90 }, unitPrices: { c1: 24.90, c3: 28.90, c5: 36.90 } },
+            { id: 2, name: "Filtro 4 Tomadas ABS", type: "abs", img: "filtro_4_abs.jpg", master: 20, masterPrices: { c1: 24.50, c3: 29.50, c5: 38.50 }, unitPrices: { c1: 26.50, c3: 31.50, c5: 40.50 } },
+            { id: 3, name: "Filtro 5 Tomadas ABS", type: "abs", img: "filtro_5_abs.jpg", master: 20, masterPrices: { c1: 25.90, c3: 29.90, c5: 38.90 }, unitPrices: { c1: 27.90, c3: 31.90, c5: 40.90 } },
+            { id: 4, name: "Filtro 6 Tomadas ABS", type: "abs", img: "filtro_6_abs.jpg", master: 16, masterPrices: { c1: 31.10, c3: 35.25, c5: 39.25 }, unitPrices: { c1: 33.10, c3: 37.25, c5: 41.25 } },
+            { id: 5, name: "Filtro 6 Tomadas Metal", type: "metal", img: "filtro_6_metal.jpg", master: 12, masterPrices: { c1: 43.00, c3: 47.00, c5: 51.00 }, unitPrices: { c1: 45.00, c3: 49.00, c5: 53.00 } },
+            { id: 6, name: "Filtro 8 Tomadas Metal", type: "metal", img: "filtro_8_metal.jpg", master: 10, masterPrices: { c1: 52.00, c3: 56.00, c5: 60.00 }, unitPrices: { c1: 54.00, c3: 58.00, c5: 62.00 } },
+            { id: 7, name: "Filtro 10 Tomadas Metal", type: "metal", img: "filtro_10_metal.jpg", master: 8, masterPrices: { c1: 59.00, c3: 64.00, c5: 68.00 }, unitPrices: { c1: 61.00, c3: 66.00, c5: 70.00 } }
         ];
 
-        const freightTable = { 'SP': 40, 'RJ': 40, 'MG': 40, 'ES': 40, 'PR': 50, 'SC': 50, 'RS': 50, 'GO': 60, 'MT': 60, 'MS': 60, 'DF': 60, 'BA': 100, 'AM': 120 };
+        const regions = {
+            sudesteSul: ['SP', 'RJ', 'MG', 'ES', 'PR', 'SC', 'RS'],
+            centroOeste: ['GO', 'MT', 'MS', 'DF'],
+            nordeste: ['BA', 'PE', 'CE', 'MA', 'PI', 'RN', 'PB', 'AL', 'SE'],
+            norte: ['AM', 'PA', 'TO', 'RO', 'RR', 'AP', 'AC']
+        };
+
+        const svgIcons = {
+            recommended: `
+                <div class="flex gap-2 opacity-80 grayscale">
+                    <svg title="Celular" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                    <svg title="Notebook" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="2" y1="20" x2="22" y2="20"></line></svg>
+                    <svg title="Vídeo Game" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 12h4m-2-2v4M15 11h.01M18 13h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>`,
+            avoid: `
+                <div class="flex gap-2 opacity-50 grayscale">
+                    <svg title="Secador" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 7l4 4-4 4M21 12H9M6 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <svg title="Microondas" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M6 15h2M6 9h2M14 9h4v6h-4z"></path></svg>
+                    <svg title="Grill" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10h18M7 10V5m10 5V5M5 20h14a2 2 0 002-2v-5H3v5a2 2 0 002 2z"></path></svg>
+                </div>`,
+            pin: (t) => {
+                let dots = '';
+                if(t === 'A') dots = '<rect x="7" y="10" width="2" height="4"/><rect x="15" y="10" width="2" height="4"/>';
+                if(t === 'B') dots = '<rect x="7" y="10" width="2" height="4"/><rect x="15" y="10" width="2" height="4"/><circle cx="12" cy="16" r="1.5"/>';
+                if(t === 'C') dots = '<circle cx="8" cy="12" r="1.5"/><circle cx="16" cy="12" r="1.5"/>';
+                if(t === 'J' || t === 'N') dots = '<circle cx="8" cy="13" r="1.5"/><circle cx="16" cy="13" r="1.5"/><circle cx="12" cy="11" r="1.5"/>';
+                return `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="6" width="16" height="12" rx="2" fill="#e2e8f0"/>${dots}</svg>`;
+            }
+        };
+
+        function calculateFreight(totalUnits, hasMetal, state) {
+            if (!state || totalUnits === 0) return 0;
+            let base = 0;
+            if (hasMetal) {
+                if (totalUnits <= 2) base = 20;
+                else if (totalUnits <= 4) base = 25;
+                else base = 30;
+            } else {
+                if (totalUnits <= 2) base = 15;
+                else if (totalUnits <= 4) base = 20;
+                else base = 25;
+            }
+            if (regions.sudesteSul.includes(state)) return base;
+            if (regions.centroOeste.includes(state)) return base + 5;
+            if (regions.nordeste.includes(state)) return base + 8;
+            if (regions.norte.includes(state)) return base + 12;
+            return base;
+        }
 
         function setUserMode(mode) {
             userMode = mode;
             document.body.className = `bg-slate-50 text-slate-800 pb-24 md:pb-12 mode-${mode}`;
             document.getElementById('auth-screen').classList.add('hidden');
-            document.getElementById('user-banner-text').innerText = mode === 'consumidor' ? 'Catálogo Varejo (Consumidor)' : 'Catálogo Atacado (Revendedor)';
+            document.getElementById('user-banner-text').innerText = mode === 'consumidor' ? 'Catálogo Varejo (Consumidor Final)' : 'Catálogo Atacado (Revendedores)';
             document.getElementById('header-subtitle').innerText = mode === 'consumidor' ? 'Tabela Varejo 2026' : 'Tabela Unificada • 2026';
             renderContent();
         }
@@ -226,18 +304,18 @@
             const tableBody = document.getElementById('table-body');
             const cardsContainer = document.getElementById('cards-container');
             const desktopCardsContainer = document.getElementById('desktop-cards-container');
-            
             tableBody.innerHTML = ""; cardsContainer.innerHTML = ""; desktopCardsContainer.innerHTML = "";
 
             products.forEach((p, idx) => {
-                const isMetal = p.name.includes('Metal');
+                const isMetal = p.type === 'metal';
                 const accentColor = isMetal ? 'text-orange-700' : 'text-slate-900';
+                const maxWatts = isMetal ? "1200W" : "900W";
                 
-                // 1. Desktop: TABLE (Modo Revendedor)
+                // Desktop: TABLE (Modo Revendedor)
                 tableBody.innerHTML += `
                     <tr class="border-b border-slate-100 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'}">
                         <td class="p-2"><img src="${p.img}" class="w-12 h-12 object-cover rounded shadow-sm bg-slate-100" onerror="this.src='https://via.placeholder.com/100?text=Filtro'"></td>
-                        <td class="p-4 font-black uppercase tracking-tighter ${accentColor}">${p.name}</td>
+                        <td class="p-4 font-black uppercase tracking-tighter ${accentColor}">${p.name}<br><span class="text-[8px] text-slate-400 font-bold">BIVOLT • MAX ${maxWatts}</span></td>
                         ${['c1', 'c3', 'c5'].map(cable => `
                             <td class="p-2 text-center border-r border-slate-100">
                                 <div class="flex flex-col gap-1 items-center mb-2">
@@ -246,60 +324,88 @@
                                 </div>
                                 <div class="flex flex-col gap-1 items-center no-print">
                                     <div class="flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200">
-                                        <button onclick="updateQty('${p.id}-${cable}', -1)" class="w-6 h-6 bg-white rounded shadow-sm text-slate-400">-</button>
+                                        <button onclick="updateQty('${p.id}-${cable}', -1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm text-slate-400">-</button>
                                         <input type="number" id="qty-${p.id}-${cable}" value="${cart[`${p.id}-${cable}`] || 0}" class="w-8 text-center bg-transparent font-black text-[10px]">
-                                        <button onclick="updateQty('${p.id}-${cable}', 1)" class="w-6 h-6 bg-white rounded shadow-sm text-blue-600">+</button>
+                                        <button onclick="updateQty('${p.id}-${cable}', 1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm text-blue-600">+</button>
                                     </div>
-                                    <button onclick="addBox('${p.id}-${cable}')" class="wholesale-only text-[8px] font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-200 uppercase tracking-tighter">+ CAIXA</button>
+                                    <button onclick="addBox('${p.id}-${cable}')" class="wholesale-only text-[8px] font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-200 uppercase tracking-tighter hover:bg-blue-100">+ CAIXA</button>
                                 </div>
                             </td>`).join('')}
-                        <td class="wholesale-only p-4 text-center font-black bg-blue-50/50">${p.master} un</td>
+                        <td class="wholesale-only p-4 text-center font-black bg-blue-50/50 text-blue-900">${p.master} un</td>
                     </tr>`;
 
-                // 2. Desktop: CARDS RETANGULARES (Modo Consumidor)
+                // Desktop: CARDS (Modo Consumidor)
                 desktopCardsContainer.innerHTML += `
-                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex items-stretch hover:shadow-md transition group">
-                        <div class="w-48 bg-slate-100 relative overflow-hidden flex items-center justify-center p-4">
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex items-stretch hover:shadow-md transition group h-full">
+                        <div class="w-48 bg-slate-100 relative overflow-hidden flex items-center justify-center p-4 border-r border-slate-50">
                             <img src="${p.img}" class="max-h-full max-w-full object-contain group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/200?text=Filtro'">
-                            ${isMetal ? '<span class="absolute top-2 left-2 bg-orange-500 text-white text-[8px] font-black px-2 py-0.5 rounded-full">METAL</span>' : ''}
+                            <div class="absolute top-2 left-2 flex flex-col gap-1">
+                                <span class="${isMetal ? 'bg-orange-500' : 'bg-slate-700'} text-white text-[8px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest">${isMetal ? 'Linha Metal' : 'Linha ABS'}</span>
+                                <span class="bg-blue-600 text-white text-[8px] font-black px-2 py-0.5 rounded-full uppercase">Bivolt</span>
+                            </div>
                         </div>
                         <div class="flex-grow p-6 flex flex-col justify-between">
-                            <div>
-                                <h3 class="font-black text-xl uppercase tracking-tighter ${accentColor} leading-none mb-4">${p.name}</h3>
-                                <div class="grid grid-cols-3 gap-4">
-                                    ${['c1','c3','c5'].map(k => `
-                                        <div class="flex flex-col">
-                                            <span class="text-[9px] font-black text-slate-400 uppercase mb-1">Cabo ${k.replace('c1','1.1m').replace('c3','3m').replace('c5','5m')}</span>
-                                            <span class="text-lg font-black text-slate-900 leading-none">R$ ${p.unitPrices[k].toFixed(2)}</span>
-                                            <div class="flex items-center mt-3 bg-slate-50 rounded-lg p-1 border border-slate-100 w-fit">
-                                                <button onclick="updateQty('${p.id}-${k}', -1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm text-slate-400">-</button>
-                                                <input type="number" id="dqty-${p.id}-${k}" value="${cart[`${p.id}-${k}`] || 0}" class="w-8 text-center bg-transparent font-black text-[10px]">
-                                                <button onclick="updateQty('${p.id}-${k}', 1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm text-blue-600">+</button>
-                                            </div>
-                                        </div>`).join('')}
+                            <div class="flex justify-between items-start">
+                                <h3 class="font-black text-xl uppercase tracking-tighter ${accentColor} leading-tight mb-4">${p.name}</h3>
+                                <div class="flex gap-0.5 bg-slate-100 p-1 rounded-lg border border-slate-200" title="Padrões Compatíveis">
+                                    ${['A','B','C','J','N'].map(t => svgIcons.pin(t)).join('')}
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-3 mb-4">
+                                ${['c1','c3','c5'].map(k => `
+                                    <div class="flex flex-col">
+                                        <span class="text-[9px] font-black text-slate-400 uppercase mb-1 tracking-widest leading-none">${k.replace('c1','1.1m').replace('c3','3m').replace('c5','5m')}</span>
+                                        <span class="text-xl font-black text-slate-900 leading-none">R$ ${p.unitPrices[k].toFixed(2)}</span>
+                                        <div class="flex items-center mt-3 bg-slate-50 rounded-lg p-1 border border-slate-100 w-fit">
+                                            <button onclick="updateQty('${p.id}-${k}', -1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm text-slate-400">-</button>
+                                            <input type="number" id="dqty-${p.id}-${k}" value="${cart[`${p.id}-${k}`] || 0}" class="w-8 text-center bg-transparent font-black text-[10px]">
+                                            <button onclick="updateQty('${p.id}-${k}', 1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm text-blue-600">+</button>
+                                        </div>
+                                    </div>`).join('')}
+                            </div>
+
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                                <div class="flex gap-4">
+                                    <div class="flex flex-col gap-1">
+                                        <span class="text-[7px] font-black text-green-600 uppercase leading-none">Ideal para:</span>
+                                        ${svgIcons.recommended}
+                                    </div>
+                                    <div class="flex flex-col gap-1 border-l border-slate-100 pl-4">
+                                        <span class="text-[7px] font-black text-red-400 uppercase leading-none">Alta Potência:</span>
+                                        ${svgIcons.avoid}
+                                    </div>
+                                </div>
+                                <div class="text-right flex flex-col items-end">
+                                    <span class="text-[9px] font-black bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-100">MAX ${maxWatts} TOTAL</span>
+                                    <span class="text-[7px] font-bold text-slate-400 mt-1 uppercase">300W Por Tomada</span>
                                 </div>
                             </div>
                         </div>
                     </div>`;
 
-                // 3. Mobile: CARDS (Ambos os modos)
+                // 3. Mobile: CARDS
                 cardsContainer.innerHTML += `
                     <div class="bg-white rounded-xl border border-slate-200 p-4 border-l-4 ${isMetal ? 'border-l-orange-500' : 'border-l-slate-800'}">
                         <div class="flex gap-4 mb-4 items-center">
                             <img src="${p.img}" class="w-16 h-16 object-cover rounded-xl shadow-sm bg-slate-50" onerror="this.src='https://via.placeholder.com/100?text=Filtro'">
-                            <div>
-                                <span class="font-black uppercase text-xs ${accentColor}">${p.name}</span>
-                                <div class="wholesale-only bg-blue-600 text-white text-[8px] font-black px-2 py-0.5 rounded w-fit mt-1">${p.master} UNID/CX</div>
+                            <div class="flex-grow">
+                                <div class="flex justify-between items-start">
+                                    <span class="font-black uppercase text-xs ${accentColor} leading-tight">${p.name}</span>
+                                    <span class="text-[8px] font-black text-blue-600 border border-blue-200 px-1 rounded">BIVOLT</span>
+                                </div>
+                                <div class="wholesale-only bg-blue-600 text-white text-[8px] font-black px-2 py-0.5 rounded w-fit mt-1 tracking-widest">${p.master} UNID/CX</div>
+                                <div class="flex gap-1 mt-1">${['A','B','C','J','N'].map(t => `<span class="text-[7px] font-black opacity-30">${t}</span>`).join('')}</div>
                             </div>
                         </div>
                         <div class="grid grid-cols-1 gap-4">
                             ${['c1','c3','c5'].map(k => `
                                 <div class="flex items-center justify-between">
                                     <div class="flex flex-col">
-                                        <span class="text-[9px] font-black text-slate-400 uppercase leading-none mb-1">CABO ${k.replace('c1','1.1m').replace('c3','3m').replace('c5','5m')}</span>
+                                        <span class="text-[9px] font-black text-slate-400 uppercase leading-none mb-1">${k.replace('c1','1.1m').replace('c3','3m').replace('c5','5m')}</span>
                                         <div class="flex items-center gap-2">
-                                            <span class="wholesale-only text-[16px] font-black text-blue-700">R$ ${p.masterPrices[k].toFixed(2)}</span>
-                                            <span class="text-[14px] font-bold ${userMode === 'revendedor' ? 'text-slate-300 italic' : 'text-slate-900 font-black'}">R$ ${p.unitPrices[k].toFixed(2)}</span>
+                                            <span class="wholesale-only text-[16px] font-black text-blue-700 font-mono">R$ ${p.masterPrices[k].toFixed(2)}</span>
+                                            <span class="text-[14px] font-bold ${userMode === 'revendedor' ? 'text-slate-300 italic' : 'text-slate-900 font-black font-mono'}">R$ ${p.unitPrices[k].toFixed(2)}</span>
                                         </div>
                                     </div>
                                     <div class="flex flex-col items-end gap-1">
@@ -308,7 +414,7 @@
                                             <input type="number" id="mqty-${p.id}-${k}" value="${cart[`${p.id}-${k}`] || 0}" class="w-10 text-center font-black text-sm">
                                             <button onclick="updateQty('${p.id}-${k}', 1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm text-blue-600">+</button>
                                         </div>
-                                        <button onclick="addBox('${p.id}-${k}')" class="wholesale-only text-[9px] font-black text-blue-700 bg-blue-50 px-3 py-1 rounded-lg border border-blue-100 uppercase">+ CAIXA</button>
+                                        <button onclick="addBox('${p.id}-${k}')" class="wholesale-only text-[9px] font-black text-blue-700 bg-blue-50 px-3 py-1 rounded-lg border border-blue-100 uppercase tracking-widest">+ CAIXA</button>
                                     </div>
                                 </div>`).join('')}
                         </div>
@@ -326,7 +432,6 @@
 
         function updateQty(key, delta) {
             cart[key] = Math.max(0, (cart[key] || 0) + delta);
-            // Sincronizar todos os inputs possíveis daquele produto/cabo
             const ids = [`qty-${key}`, `mqty-${key}`, `dqty-${key}`];
             ids.forEach(id => { if(document.getElementById(id)) document.getElementById(id).value = cart[key]; });
             updateCartSummary();
@@ -334,47 +439,47 @@
 
         function updateCartSummary() {
             const list = document.getElementById('cart-items');
-            list.innerHTML = ""; let subtotal = 0; let items = 0;
+            const freightEl = document.getElementById('cart-freight-val');
+            list.innerHTML = ""; 
+            let subtotal = 0; let totalItems = 0; let hasMetal = false;
             const state = document.getElementById('state-selector').value;
 
             Object.keys(cart).forEach(k => {
                 if(cart[k] > 0) {
                     const [id, cable] = k.split('-'); const p = products.find(prod => prod.id == id);
                     const qty = cart[k];
+                    if (p.type === 'metal') hasMetal = true;
                     const price = (userMode === 'revendedor' && qty >= p.master) ? p.masterPrices[cable] : p.unitPrices[cable];
                     const label = cable.replace('c1','1.1m').replace('c3','3m').replace('c5','5m');
-                    subtotal += price * qty; items += qty;
-                    list.innerHTML += `<div class="flex justify-between border-b pb-1"><span>${p.name} (${label})</span><span>${qty}x R$ ${(price*qty).toFixed(2)}</span></div>`;
+                    subtotal += price * qty; totalItems += qty;
+                    list.innerHTML += `<div class="flex justify-between border-b border-slate-50 pb-1"><span>${p.name} (${label})</span><span>${qty}x R$ ${(price*qty).toFixed(2)}</span></div>`;
                 }
             });
-            const freight = state ? (freightTable[state] || 0) : 0;
-            document.getElementById('cart-total').innerText = `R$ ${(subtotal + freight).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-            document.getElementById('cart-count').innerText = items;
+            const freightValue = calculateFreight(totalItems, hasMetal, state);
+            freightEl.innerText = `R$ ${freightValue.toFixed(2)}`;
+            document.getElementById('cart-total').innerText = `R$ ${(subtotal + freightValue).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+            document.getElementById('cart-count').innerText = totalItems;
         }
 
         function processOrder() {
             const state = document.getElementById('state-selector').value;
-            if (!state) { alert("Selecione o estado para o frete!"); return; }
-            
-            let total = 0;
+            if (!state) { alert("Selecione o estado para calcular o frete!"); return; }
+            let totalItems = 0; let subtotal = 0; let hasMetal = false;
             let msg = `*SOLICITAÇÃO DE PEDIDO (${userMode.toUpperCase()})*\n📍 *Destino:* ${state}\n\n`;
-            
             Object.keys(cart).forEach(k => {
                 if(cart[k] > 0) {
                     const [id, cable] = k.split('-'); const p = products.find(prod => prod.id == id);
                     const qty = cart[k];
+                    if (p.type === 'metal') hasMetal = true;
                     const label = cable.replace('c1','1.1m').replace('c3','3m').replace('c5','5m');
                     const price = (userMode === 'revendedor' && qty >= p.master) ? p.masterPrices[cable] : p.unitPrices[cable];
-                    total += price * qty;
+                    subtotal += price * qty; totalItems += qty;
                     msg += `📦 *${p.name}*\n📏 ${label} | 🔢 ${qty} un | 💰 R$ ${(price*qty).toFixed(2)}\n\n`;
                 }
             });
-
-            if(total === 0) { alert("Adicione itens ao carrinho!"); return; }
-
-            const freight = freightTable[state] || 0;
-            msg += `💵 Subtotal: R$ ${total.toFixed(2)}\n🚚 Frete: R$ ${freight.toFixed(2)}\n⚡ *TOTAL: R$ ${(total+freight).toFixed(2)}*`;
-            
+            if(totalItems === 0) { alert("Carrinho vazio!"); return; }
+            const freight = calculateFreight(totalItems, hasMetal, state);
+            msg += `--------------------------\n💵 Subtotal: R$ ${subtotal.toFixed(2)}\n🚚 Frete: R$ ${freight.toFixed(2)}\n⚡ *TOTAL: R$ ${(subtotal+freight).toFixed(2)}*`;
             window.open(`https://wa.me/5511954941312?text=${encodeURIComponent(msg)}`);
         }
 
