@@ -14,17 +14,18 @@ async function startServer() {
       // 1. Pegamos os dados que o comprador preencheu no carrinho
       const { items, customer, address, order_nsu } = req.body;
 
-      // 2. Montamos o payload exatamente como a documentação da InfinitePay pede
-      const infinitePayPayload = {
-        handle: "eletrizei-ltda", // <-- COLOQUE SUA INFINITETAG AQUI (Ex: "eletrizei-ltda")
-        items: items.map((item: any) => ({
-          quantity: item.quantity,
-          price: Math.round(item.price * 100), // Converte R$ 10.00 para 1000 centavos
-          description: item.description
-        })),
-        order_nsu: order_nsu || `order-${Date.now()}`,
-        customer: customer || undefined,
-        address: address || undefined
+   // Monta o payload conforme a documentação da InfinitePay
+    const infinitePayPayload = {
+      handle: "eletrizei-ltda", 
+      items: items.map((item: any) => ({
+        quantity: item.quantity,
+        price: item.price, // <-- MUDADO AQUI (repassa o valor direto do carrinho)
+        description: item.description || 'Produto Sem Descrição'
+      })),
+      order_nsu: order_nsu || `order-${Date.now()}`,
+      customer: customer || undefined,
+      address: address || undefined
+  
       };
 
       console.log("Enviando para InfinitePay:", JSON.stringify(infinitePayPayload));
