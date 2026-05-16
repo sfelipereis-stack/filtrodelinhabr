@@ -15,7 +15,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Monta o payload conforme a documentação da InfinitePay
     const infinitePayPayload = {
-      handle: "SUA_INFINITE_TAG_AQUI", // <-- Troque pelo seu usuário da InfinitePay (ex: "eletrizei-ltda")
+      handle: "eletrizei-ltda", // <-- Troque pelo seu usuário da InfinitePay (ex: "eletrizei-ltda")
       items: items.map((item: any) => ({
         quantity: item.quantity,
         price: Math.round(item.price * 100), // R$ para Centavos
