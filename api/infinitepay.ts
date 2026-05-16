@@ -18,7 +18,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       handle: "eletrizei-ltda", // <-- Troque pelo seu usuário da InfinitePay (ex: "eletrizei-ltda")
       items: items.map((item: any) => ({
         quantity: item.quantity,
-        price: Math.round(item.price * 100), // R$ para Centavos
         description: item.description || 'Produto Sem Descrição'
       })),
       order_nsu: order_nsu || `order-${Date.now()}`,
