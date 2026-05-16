@@ -1,0 +1,6 @@
+{
+  "name": "Catálogo Eletrizei",
+  "description": "Catálogo interativo com seletor de perfil (Varejo/Atacado) e sistema de pedido via PIX/WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
