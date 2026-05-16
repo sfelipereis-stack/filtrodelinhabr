@@ -13,16 +13,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: 'O carrinho de itens é obrigatório.' });
     }
 
-    // Monta o payload conforme a documentação da InfinitePay
+   // Monta o payload conforme a documentação da InfinitePay
     const infinitePayPayload = {
-      handle: "eletrizei-ltda", // <-- Troque pelo seu usuário da InfinitePay (ex: "eletrizei-ltda")
+      handle: "eletrizei-ltda", 
       items: items.map((item: any) => ({
-        quantity: item.quantity,
+        quantity: parseInt(item.quantity, 10) || 1,
+        price: Math.round(Number(item.price)), // <-- ADICIONE ESSA LINHA AQUI (Preço do item)
         description: item.description || 'Produto Sem Descrição'
       })),
       order_nsu: order_nsu || `order-${Date.now()}`,
       customer: customer || undefined,
       address: address || undefined
+    };
     };
 
     // Envia os dados para a API da InfinitePay
