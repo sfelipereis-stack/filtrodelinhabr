@@ -1,13 +1,28 @@
 {
   "version": 2,
-  "rewrites": [
+  "builds": [
     {
-      "source": "/api/checkout/infinitepay",
-      "destination": "/api/infinitepay.ts"
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
     },
     {
-      "source": "/(.*)",
-      "destination": "/$1"
+      "src": "api/infinitepay.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/checkout/infinitepay",
+      "dest": "api/infinitepay.ts"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
