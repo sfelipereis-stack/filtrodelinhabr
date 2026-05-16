@@ -137,7 +137,6 @@ export default function App() {
   };
 
   const validateForm = () => {
-    // Basic Required Fields
     const requiredFields = {
       "Nome": customerName,
       "Email": customerEmail,
@@ -165,7 +164,6 @@ export default function App() {
       return false;
     }
 
-    // CPF/CNPJ Validation
     if (isCPF(customerCpfCnpj)) {
       if (!validateCPF(customerCpfCnpj)) {
         alert("CPF Inválido.");
@@ -176,7 +174,6 @@ export default function App() {
         alert("CNPJ Inválido.");
         return false;
       }
-      // Check IE if CNPJ
       if (!customerIsIeExempt && !customerStateRegistration) {
         alert("Por favor, informe a Inscrição Estadual ou marque como Isento.");
         return false;
@@ -227,9 +224,10 @@ export default function App() {
     try {
       const payload: any = {
         handle: "eletrizei-ltda",
+        // CORRIGIDO: Agora repassa o valor decimal direto, pois o server.ts multiplicará por 100 de forma fixa
         items: cartDetails.items.map(item => ({
           quantity: item.qty,
-          price: Math.round(item.price * 100),
+          price: item.price, 
           description: `${item.product.name} (${item.cable.replace('c1','1m')})`
         })),
         customer: {
@@ -250,7 +248,7 @@ export default function App() {
       if (freightValue > 0) {
         payload.items.push({
           quantity: 1,
-          price: Math.round(freightValue * 100),
+          price: freightValue, // CORRIGIDO: Repassa o frete em decimal puro
           description: "Frete de entrega"
         });
       }
@@ -709,12 +707,12 @@ export default function App() {
 
               <div className="space-y-1 mb-4 px-2 border-t pt-2">
                   <div className="flex justify-between text-[10px] text-slate-400 font-black uppercase italic">
-                      <span>FRETE PARA ENTREGA:</span>
-                      {selectedState ? (
-                        <span>R$ {freightValue.toFixed(2)}</span>
-                      ) : (
-                        <span className="text-red-500 animate-pulse">Preencha o seu CEP para cálculo do frete</span>
-                      )}
+                    <span>FRETE PARA ENTREGA:</span>
+                    {selectedState ? (
+                      <span>R$ {freightValue.toFixed(2)}</span>
+                    ) : (
+                      <span className="text-red-500 animate-pulse">Preencha o seu CEP para cálculo do frete</span>
+                    )}
                   </div>
                   <div className="flex justify-between items-center">
                       <span className="text-[10px] font-black uppercase">TOTAL ESTIMADO:</span>
